@@ -1,11 +1,11 @@
-# El bot en vivo. Cada hora: lee precios reales, decide, simula las operaciones y guarda el estado.
+# El bot en vivo. Cada 30 minutos: lee precios reales, decide, simula las operaciones y guarda el estado.
 # El estado (base de datos SQLite + dashboard.json) vive en la rama `bot-data`, separada del código,
 # y la web lo lee directamente de ahí. Gratis en repositorios públicos.
-name: Bot (ciclo horario, dinero ficticio)
+name: Bot (ciclo cada 30 min, dinero ficticio)
 
 on:
   schedule:
-    - cron: "7 * * * *"      # minuto 7 de cada hora (UTC). GitHub puede retrasarlo de 5 a 30 min.
+    - cron: "7,37 * * * *"   # minutos 7 y 37 de cada hora (UTC). GitHub puede retrasarlo de 5 a 30 min.
   workflow_dispatch:          # botón "Run workflow" en la pestaña Actions para lanzarlo a mano
 
 permissions:

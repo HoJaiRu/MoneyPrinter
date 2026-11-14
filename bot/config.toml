@@ -29,7 +29,7 @@ deslizamiento_pct = 0.05      # deslizamiento simulado por lado (precio algo peo
 orden_minima_usd = { acciones = 1.0, cripto = 5.0 }   # mínimos reales: fracciones de acción ~1 $, Binance 5 USDT
 
 [agresividad]
-actual = "equilibrado"
+actual = "maximo"
 
 [[agresividad.niveles]]
 id = "muy_prudente"
@@ -53,7 +53,7 @@ nombre = "Equilibrado"
 tamano_pct = 10
 stop_pct = 5
 max_operaciones = 6
-resumen = "Hasta 6 posiciones del 10 % con stop del 5 %. Es el nivel con el que opera el bot."
+resumen = "Hasta 6 posiciones del 10 % con stop del 5 %."
 
 [[agresividad.niveles]]
 id = "agresivo"
@@ -69,7 +69,12 @@ nombre = "Máximo"
 tamano_pct = 20
 stop_pct = 8
 max_operaciones = 4
-resumen = "Posiciones del 20 % (el tope por activo) y stop más lejano. Las rachas malas se notan mucho."
+resumen = "Posiciones del 20 % (el tope por activo) y stop del 8 %. Es el nivel con el que opera el bot. Las rachas malas se notan mucho."
+
+[noticias]
+activo = true                 # lee titulares de Yahoo Finance antes de cada compra
+horas = 24                    # solo cuentan los titulares de las últimas 24 horas
+max_negativos = 2             # con 2 o más titulares negativos (y más negativos que positivos) NO se compra
 
 [universo]
 acciones = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL"]   # Yahoo Finance

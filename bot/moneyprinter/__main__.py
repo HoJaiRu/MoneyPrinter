@@ -3,6 +3,7 @@
   run       un ciclo en vivo: lee precios, decide, guarda en SQLite y escribe dashboard.json
   export    solo regenera dashboard.json desde SQLite
   backtest  prueba las estrategias con datos históricos y escribe un informe
+  news      enseña los titulares que lee el bot y su veredicto
 """
 from __future__ import annotations
 
@@ -34,6 +35,17 @@ def cmd_export(a, cfg):
     store = Store(Path(a.state) / "moneyprinter.sqlite")
     export.write(cfg, store, a.json or Path(a.state) / "dashboard.json")
     store.close()
+
+
+def cmd_news(a, cfg):
+    """Muestra qué titulares lee el bot ahora mismo y cómo los puntúa (para comprobar el filtro)."""
+    from . import news
+    from .engine import universe
+    for sym, mkt in universe(cfg):
+        v = news.check(sym, mkt, cfg)
+        print(f"{sym}: {'OK' if v.ok else 'NO COMPRAR'} · {v.summary}")
+        for t in v.negatives:
+            print(f"    negativo: {t}")
 
 
 def cmd_backtest(a, cfg):
@@ -81,9 +93,10 @@ def main(argv=None):
     r = sub.add_parser("run"); r.add_argument("--state", default="../state"); r.add_argument("--json"); r.add_argument("--alert-file")
     e = sub.add_parser("export"); e.add_argument("--state", default="../state"); e.add_argument("--json")
     b = sub.add_parser("backtest"); b.add_argument("--days", type=int, default=720); b.add_argument("--out", default="../backtest")
+    sub.add_parser("news")
     a = ap.parse_args(argv)
     cfg = config_mod.load(a.config)
-    {"run": cmd_run, "export": cmd_export, "backtest": cmd_backtest}[a.cmd](a, cfg)
+    {"run": cmd_run, "export": cmd_export, "backtest": cmd_backtest, "news": cmd_news}[a.cmd](a, cfg)
 
 
 if __name__ == "__main__":

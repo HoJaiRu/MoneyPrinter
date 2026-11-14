@@ -2,16 +2,17 @@
 
 Bot de trading con **dinero ficticio** y **precios reales**. Opera solo con reglas técnicas fijas (sin IA). No es asesoramiento financiero.
 
-## Cómo funciona un ciclo (cada hora)
+## Cómo funciona un ciclo (cada 30 minutos)
 
 ```
-GitHub Actions (cron, minuto 7 de cada hora)
+GitHub Actions (cron, minutos 7 y 37 de cada hora)
   │ 1. descarga el código (rama main) y el estado (rama bot-data)
   │ 2. python -m moneyprinter run
   │      ├─ data.py      → pide velas de 1 h a Yahoo Finance (acciones, SPY) y a Binance (cripto)
   │      ├─ engine.py    → vigila stops con velas de 5 min, pregunta a la estrategia, aplica el riesgo
   │      ├─ strategies/  → decide comprar / vender y da el MOTIVO exacto
   │      ├─ risk.py      → tamaño de la orden, liquidez mínima, freno de emergencia
+  │      ├─ news.py      → antes de comprar lee titulares de Yahoo y descarta la compra si hay alarma
   │      ├─ broker.py    → simula la ejecución: deslizamiento + comisión
   │      ├─ db.py        → guarda todo en state/moneyprinter.sqlite
   │      └─ export.py    → escribe state/dashboard.json (la forma que lee la web)
@@ -32,6 +33,7 @@ No hay servidor ni puertos abiertos: todo son archivos. Actions es el "cron", la
 | `moneyprinter/indicators.py` | SMA (media móvil simple) y RSI. |
 | `moneyprinter/strategies/` | Estrategias intercambiables. `base.py` es el contrato; `cruce_medias.py` y `rsi_rebote.py` son dos estrategias. |
 | `moneyprinter/risk.py` | Tamaño de cada compra (nivel de agresividad, máx. 20 % por activo, mín. 10 % en liquidez, orden mínima) y freno del 15 %. |
+| `moneyprinter/news.py` | Filtro de noticias: titulares de las últimas 24 h puntuados con palabras clave fijas (sin IA). Con 2 o más negativos no se compra. No se puede probar con backtest (no hay histórico de titulares gratis). |
 | `moneyprinter/broker.py` | `PaperBroker`: compra un 0,05 % más caro, vende un 0,05 % más barato y cobra un 0,1 % en cada lado. Aquí se enchufará Alpaca. |
 | `moneyprinter/portfolio.py` | La cartera en memoria (efectivo, posiciones, operaciones). La misma para vivo y backtest. |
 | `moneyprinter/engine.py` | El ciclo en vivo. |
@@ -46,6 +48,7 @@ No hay servidor ni puertos abiertos: todo son archivos. Actions es el "cron", la
 pip install -r requirements.txt
 python -m moneyprinter run --state ../state      # un ciclo en vivo (crea la cartera si no existe)
 python -m moneyprinter backtest                  # backtest de todas las estrategias frente a SPY
+python -m moneyprinter news                      # titulares que lee el bot y su veredicto
 python -m pytest -q tests                        # pruebas
 ```
 

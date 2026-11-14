@@ -1,4 +1,4 @@
-"""Un ciclo del bot en vivo (se ejecuta cada hora desde GitHub Actions).
+"""Un ciclo del bot en vivo (se ejecuta cada 30 minutos desde GitHub Actions).
 
 Orden de un ciclo:
   1. Cargar la cartera desde SQLite.
@@ -6,7 +6,8 @@ Orden de un ciclo:
   3. Vigilar los stop-loss con velas de 5 min desde el ciclo anterior (si el precio tocó el stop
      entre ciclos, se vende a ese precio, o al de apertura si abrió por debajo: como pasaría en real).
   4. Preguntar a la estrategia: ¿vender lo que tengo? ¿comprar algo nuevo?
-  5. Pasar cada compra por el control de riesgo (tamaño, liquidez, nº de posiciones, freno).
+  5. Pasar cada compra por el control de riesgo (tamaño, liquidez, nº de posiciones, freno)
+     y por el estudio previo (noticias recientes, coste y pérdida posible).
   6. Calcular el valor de la cartera, el máximo, la caída y el freno de emergencia.
   7. Guardarlo todo en SQLite."""
 from __future__ import annotations
@@ -17,7 +18,7 @@ from zoneinfo import ZoneInfo
 
 import pandas as pd
 
-from . import data, risk
+from . import data, news, risk
 from .broker import PaperBroker
 from .strategies import build
 
@@ -61,7 +62,7 @@ def init_portfolio(cfg, store, now, fetch=data.bars):
     store.commit()
 
 
-def run_cycle(cfg, store, now=None, fetch=data.bars) -> dict:
+def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check) -> dict:
     now = pd.Timestamp(now or pd.Timestamp.now(tz="UTC"))
     ts = iso(now)
     if not store.initialized():
@@ -158,7 +159,17 @@ def run_cycle(cfg, store, now=None, fetch=data.bars) -> dict:
         if not size:
             log("info", f"Señal de compra en {sym} ({sig.reason}), pero no se compra: {why}.")
             continue
-        pos = pf.open(broker, sym, mkt, size, prices[sym], stop_pct, ts, sig.reason, sig.bar_time)
+        # Estudio previo de la compra: noticias, coste y riesgo. Queda escrito en el registro.
+        verdict = news_check(sym, mkt, cfg)
+        costs = 2 * (cfg["riesgo"]["comision_pct"] + cfg["riesgo"]["deslizamiento_pct"])
+        study = (f"{verdict.summary}. Necesita subir un {fmt(costs)} % para cubrir costes; "
+                 f"si toca el stop pierde unos {fmt(size * (stop_pct + costs) / 100)} $")
+        if not verdict.ok:
+            log("warning", f"Compra de {sym} DESCARTADA por noticias ({sig.reason}). {verdict.summary}. "
+                           f"Titular: «{verdict.negatives[0][:120]}»")
+            continue
+        log("info", f"Estudio de {sym}: {study}.")
+        pos = pf.open(broker, sym, mkt, size, prices[sym], stop_pct, ts, f"{sig.reason} · {verdict.summary}", sig.bar_time)
         summary["buys"] += 1
         log("info", f"COMPRA {sym}: {fmt(size)} $ a {fmt(pos.entry_price)} $ ({sig.reason}). Stop en {fmt(pos.stop_loss)} $.")
 

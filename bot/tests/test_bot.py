@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from moneyprinter import backtest, config, engine, export, risk
+from moneyprinter import backtest, config, engine, export, news, risk
 from moneyprinter.broker import PaperBroker
 from moneyprinter.db import Store
 from moneyprinter.portfolio import Portfolio
@@ -35,7 +35,9 @@ def make_fetch(drift=0.0, low_override=None):
 
 @pytest.fixture
 def cfg():
-    return config.load()
+    c = config.load()
+    c["noticias"]["activo"] = False      # las pruebas no usan internet
+    return c
 
 
 def test_config_limits(cfg):
@@ -55,7 +57,7 @@ def test_broker_costs():
 def test_order_size_respects_limits(cfg):
     pf = Portfolio(50, 50, peak_equity=50)
     size, why = risk.order_size(pf, {}, "cripto", cfg)
-    assert why is None and size == 5.0               # 10 % de 50 = 5 $ (= mínimo de Binance)
+    assert why is None and size == 10.0              # nivel Máximo: 20 % de 50 = 10 $
     pf.cash = 6.0                                     # casi sin efectivo: no puede bajar del 10 % de liquidez
     pf.positions = {}
     size, why = risk.order_size(pf, {}, "cripto", cfg)
@@ -118,7 +120,7 @@ def test_buy_then_stop_loss_between_cycles(tmp_path, cfg):
     assert len(pf2.trades) == 3 and all(t.exit_reason.startswith("Stop-loss") for t in pf2.trades)
     for t in pf2.trades:
         assert t.exit_price < t.stop_loss and t.pnl < 0   # vende al stop (menos deslizamiento): pérdida real
-        assert -5.6 < t.pnl_pct < -5                       # −5 % del stop + comisiones y deslizamiento
+        assert -8.6 < t.pnl_pct < -8                       # −8 % del stop + comisiones y deslizamiento
 
 
 def test_backtest_runs(cfg):
@@ -129,3 +131,23 @@ def test_backtest_runs(cfg):
         assert m["operaciones"] > 0
         pf = res["portfolio"]
         assert pf.cash >= 0
+
+
+def test_news_rule():
+    bad = ["Nvidia sued over chip fraud", "Regulators open probe into Nvidia", "Nvidia beats estimates"]
+    v = news.judge(bad, 2)
+    assert not v.ok and len(v.negatives) == 2
+    assert news.judge(["Apple hits record high", "Apple unveils new iPad"], 2).ok
+    assert news.judge([], 2).ok
+    assert news._parse({"content": {"title": "x", "pubDate": "2026-11-14T10:00:00Z"}})[0] == "x"
+    assert news._parse({"title": "y", "providerPublishTime": 1700000000})[1] == 1700000000
+
+
+def test_news_veto_blocks_buy(tmp_path, cfg):
+    cfg["estrategia"] = {"nombre": "cruce_medias", "version": "test", "temporalidad": "1h", "parametros": {}}
+    store = Store(tmp_path / "s.sqlite")
+    veto = lambda s, m, c: news.Verdict(False, "Noticias 24 h: 3 titulares, 2 negativos, 0 positivos", ["Exchange hacked"])
+    engine.run_cycle(cfg, store, now=pd.Timestamp("2026-11-14T16:30Z"), news_check=veto,
+                     fetch=lambda s, m, i, n: v_bars(150, "1h" if i == "1h" else "5min", "2026-11-14T16:00Z"))
+    assert not store.load_portfolio().positions
+    assert any("DESCARTADA por noticias" in l["message"] for l in store.logs())
