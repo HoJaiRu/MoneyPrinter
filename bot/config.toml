@@ -1,0 +1,77 @@
+# Configuración del bot. Aquí NO van claves ni contraseñas (este archivo es público).
+# Cualquier cambio de estrategia o de riesgo se hace aquí, con un commit, y solo con la aprobación de HoJaiRu.
+
+[cartera]
+capital_inicial = 50.0        # USD ficticios con los que arranca la cartera
+moneda = "USD"
+activo = true                 # false = el bot sigue leyendo precios pero no abre ni cierra nada (pausa)
+
+[estrategia]
+nombre = "cruce_medias"       # archivo en bot/moneyprinter/strategies/ (estrategias intercambiables)
+version = "v1.0"
+temporalidad = "1h"           # velas de 1 hora
+
+[estrategia.parametros]
+rapida = 20                   # SMA rápida (20 velas)
+lenta = 50                    # SMA lenta (50 velas)
+rsi_periodo = 14
+rsi_max_entrada = 70          # no compra si el RSI ya está en sobrecompra
+
+[riesgo]
+max_por_activo_pct = 20       # nunca más del 20 % de la cartera en un mismo activo
+min_liquidez_pct = 10         # siempre al menos un 10 % en efectivo
+freno_emergencia_pct = 15     # si cae un 15 % desde el máximo: no abre más operaciones y avisa
+comision_pct = 0.1            # comisión simulada por lado (compra y venta)
+deslizamiento_pct = 0.05      # deslizamiento simulado por lado (precio algo peor que el visto)
+orden_minima_usd = { acciones = 1.0, cripto = 5.0 }   # mínimos reales: fracciones de acción ~1 $, Binance 5 USDT
+
+[agresividad]
+actual = "equilibrado"
+
+[[agresividad.niveles]]
+id = "muy_prudente"
+nombre = "Muy prudente"
+tamano_pct = 5
+stop_pct = 3
+max_operaciones = 3
+resumen = "Pocas operaciones pequeñas. Mueve poco la cartera, para bien y para mal."
+
+[[agresividad.niveles]]
+id = "prudente"
+nombre = "Prudente"
+tamano_pct = 8
+stop_pct = 4
+max_operaciones = 4
+resumen = "Algo más de exposición, stop cercano."
+
+[[agresividad.niveles]]
+id = "equilibrado"
+nombre = "Equilibrado"
+tamano_pct = 10
+stop_pct = 5
+max_operaciones = 6
+resumen = "Hasta 6 posiciones del 10 % con stop del 5 %. Es el nivel con el que opera el bot."
+
+[[agresividad.niveles]]
+id = "agresivo"
+nombre = "Agresivo"
+tamano_pct = 15
+stop_pct = 7
+max_operaciones = 6
+resumen = "Hasta el 90 % invertido (el máximo permitido). Más ganancia posible y más pérdida posible."
+
+[[agresividad.niveles]]
+id = "maximo"
+nombre = "Máximo"
+tamano_pct = 20
+stop_pct = 8
+max_operaciones = 4
+resumen = "Posiciones del 20 % (el tope por activo) y stop más lejano. Las rachas malas se notan mucho."
+
+[universo]
+acciones = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL"]   # Yahoo Finance
+cripto = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]             # Binance (pares contra USDT ≈ USD)
+
+[referencia]
+simbolo = "SPY"
+nombre = "S&P 500 (comprar y mantener)"

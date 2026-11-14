@@ -1,0 +1,38 @@
+# Comprueba el motor en cada cambio de bot/: pruebas sin internet + backtest con precios históricos reales.
+# El informe del backtest aparece en el resumen de la ejecución (pestaña Actions) y como archivo descargable.
+name: Bot (pruebas y backtest)
+
+on:
+  push:
+    paths: ["bot/**", ".github/workflows/bot-ci.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: bot/requirements.txt
+      - name: Instalar dependencias
+        run: pip install -r bot/requirements.txt pytest
+      - name: Pruebas
+        working-directory: bot
+        run: python -m pytest -q tests
+      - name: Backtest con datos históricos reales
+        working-directory: bot
+        run: |
+          python -m moneyprinter backtest --out ../backtest
+          cat ../backtest/backtest.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backtest
+          path: backtest/
