@@ -1,0 +1,2 @@
+# MoneyPrinter
+Trading bot Proyect
