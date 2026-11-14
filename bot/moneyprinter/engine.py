@@ -62,7 +62,7 @@ def init_portfolio(cfg, store, now, fetch=data.bars):
     store.commit()
 
 
-def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check) -> dict:
+def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check, study_loader=news.load_study) -> dict:
     now = pd.Timestamp(now or pd.Timestamp.now(tz="UTC"))
     ts = iso(now)
     if not store.initialized():
@@ -124,7 +124,11 @@ def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check) -> d
             pos.last_check = ts
 
     # Estudio de Claude (si lo hay y es reciente): se anota en el registro cada vez que llega uno nuevo
-    study = news.load_study(cfg) if news_check is news.check else None
+    study = study_loader(cfg) if news_check is news.check else None
+    prev_pending = store.get("pending", {}) or {}
+    pending = {}          # operaciones con señal que esperan un estudio reciente de Claude
+    py_now = now.to_pydatetime()
+    wait_sell = float(cfg.get("estudio", {}).get("espera_venta_min", 70))
     if study and study.get("generado") != store.get("study_seen"):
         store.set("study_seen", study["generado"])
         store.set("study", study)
@@ -147,6 +151,22 @@ def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check) -> d
         tradable = market_open(mkt, df, now)
         if sym in pf.positions:
             reason = strat.exit_at(prep, i)
+            if reason and tradable and active and study is not None:
+                # Venta por estrategia: espera al estudio de Claude (el stop-loss NO espera nunca).
+                was = prev_pending.get(sym, {})
+                since = was.get("desde", ts) if was.get("tipo") == "venta" else ts
+                if news.fresh(study, sym, cfg, py_now):
+                    if study["activos"][sym].get("salida") == "mantener":
+                        pending[sym] = {"tipo": "venta", "motivo": reason, "desde": since, "estado": "Claude dice mantener"}
+                        if was.get("estado") != "Claude dice mantener":
+                            log("info", f"Señal de venta en {sym} ({reason}), pero el estudio de Claude dice mantener: "
+                                        f"{str(study['activos'][sym].get('tesis', ''))[:250]}")
+                        continue
+                elif (now - pd.Timestamp(since)) < pd.Timedelta(minutes=wait_sell):
+                    pending[sym] = {"tipo": "venta", "motivo": reason, "desde": since, "estado": "esperando estudio"}
+                    if not was:
+                        log("info", f"Señal de venta en {sym} ({reason}). En espera del estudio de Claude (máx. {wait_sell:g} min).")
+                    continue
             if reason and tradable and active:
                 tr = pf.close(broker, sym, prices[sym], ts, reason)
                 summary["sells"] += 1
@@ -165,10 +185,19 @@ def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check) -> d
             store.use_signal(sym, sig.bar_time)
             continue
         size, why = risk.order_size(pf, prices, mkt, cfg)
-        store.use_signal(sym, sig.bar_time)
         if not size:
+            store.use_signal(sym, sig.bar_time)
             log("info", f"Señal de compra en {sym} ({sig.reason}), pero no se compra: {why}.")
             continue
+        if study is not None and not news.fresh(study, sym, cfg, py_now):
+            # Hay señal, pero el estudio de Claude de este activo no es reciente: se espera (la señal vale ~3 h).
+            was = prev_pending.get(sym, {})
+            pending[sym] = {"tipo": "compra", "motivo": sig.reason, "estado": "esperando estudio",
+                            "desde": was.get("desde", ts) if was.get("tipo") == "compra" else ts}
+            if was.get("tipo") != "compra":
+                log("info", f"Señal de compra en {sym} ({sig.reason}). En espera del estudio de Claude antes de comprar.")
+            continue
+        store.use_signal(sym, sig.bar_time)
         # Estudio previo de la compra: noticias, coste y riesgo. Queda escrito en el registro.
         verdict = news_check(sym, mkt, cfg, study) if news_check is news.check else news_check(sym, mkt, cfg)
         costs = 2 * (cfg["riesgo"]["comision_pct"] + cfg["riesgo"]["deslizamiento_pct"])
@@ -181,6 +210,8 @@ def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check) -> d
         pos = pf.open(broker, sym, mkt, size, prices[sym], stop_pct, ts, f"{sig.reason} · {verdict.summary[:260]}", sig.bar_time)
         summary["buys"] += 1
         log("info", f"COMPRA {sym}: {fmt(size)} $ a {fmt(pos.entry_price)} $ ({sig.reason}). Stop en {fmt(pos.stop_loss)} $.")
+
+    store.set("pending", pending)
 
     # 6. Valor, máximo y freno
     eq = pf.equity(prices)

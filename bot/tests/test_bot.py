@@ -162,3 +162,27 @@ def test_claude_study_gates_buy(cfg):
     v = news.check("NVDA", "acciones", cfg, study)
     assert v.ok and "favorable" in v.summary
     assert news.check("AAPL", "acciones", cfg, study).ok       # sin estudio para AAPL: respaldo (desactivado en pruebas)
+
+
+def _study(at, **extra):
+    a = {"veredicto": "comprar", "tesis": "Prueba.", "estudiado": at}
+    a.update(extra)
+    return {"generado": "2026-11-14T08:00:00Z", "activos": {s: dict(a) for s in ("BTCUSDT", "ETHUSDT", "SOLUSDT")}}
+
+
+def test_buy_waits_for_fresh_study(tmp_path, cfg):
+    cfg["estrategia"] = {"nombre": "cruce_medias", "version": "test", "temporalidad": "1h", "parametros": {}}
+    store = Store(tmp_path / "s.sqlite")
+    fetch = lambda s, m, i, n: v_bars(150, "1h" if i == "1h" else "5min", "2026-11-14T16:00Z")
+    now = pd.Timestamp("2026-11-14T16:30Z")
+    # estudio de hace 8 horas: hay señal pero se queda en espera, sin comprar
+    engine.run_cycle(cfg, store, now=now, fetch=fetch, study_loader=lambda c: _study("2026-11-14T08:00:00Z"))
+    assert not store.load_portfolio().positions
+    assert set(store.get("pending")) == {"BTCUSDT", "ETHUSDT", "SOLUSDT"}
+    assert export.build_dashboard(cfg, store, now)["pending"][0]["tipo"] == "compra"
+    # Claude estudia los activos (hace 10 min): en el ciclo siguiente se compra
+    engine.run_cycle(cfg, store, now=now + pd.Timedelta(minutes=30), fetch=fetch,
+                     study_loader=lambda c: _study("2026-11-14T16:50:00Z"))
+    pf = store.load_portfolio()
+    assert len(pf.positions) == 3 and not store.get("pending")
+    assert all("Estudio de Claude" in p.entry_reason for p in pf.positions.values())
