@@ -69,7 +69,8 @@ def test_order_size_respects_limits(cfg):
 
 def test_brake(cfg):
     pf = Portfolio(50, 50, peak_equity=60)
-    assert risk.update_brake(pf, 50.5, cfg, "t") is True    # −15,8 % desde 60
+    assert risk.update_brake(pf, 50.5, cfg, "t") is False   # −15,8 % desde 60: aún no
+    assert risk.update_brake(pf, 35.0, cfg, "t") is True    # −41,7 % desde 60: salta el freno del 40 %
     assert pf.brake_active
 
 

@@ -32,7 +32,7 @@ No hay servidor ni puertos abiertos: todo son archivos. Actions es el "cron", la
 | `moneyprinter/data.py` | Lee precios. Binance: primero `data-api.binance.vision`, luego `api.binance.com` y, si fallan, Yahoo. |
 | `moneyprinter/indicators.py` | SMA (media móvil simple) y RSI. |
 | `moneyprinter/strategies/` | Estrategias intercambiables. `base.py` es el contrato; `cruce_medias.py` y `rsi_rebote.py` son dos estrategias. |
-| `moneyprinter/risk.py` | Tamaño de cada compra (nivel de agresividad, máx. 20 % por activo, mín. 10 % en liquidez, orden mínima) y freno del 15 %. |
+| `moneyprinter/risk.py` | Tamaño de cada compra (nivel de agresividad, máx. 30 % por activo, mín. 10 % en liquidez, orden mínima) y freno de emergencia del 40 %. |
 | `../research/estudio.json` | Estudio a fondo de cada activo que escribe Claude (ver `research/README.md`). Si dice «evitar», no se compra. |
 | `moneyprinter/news.py` | Descarga el estudio de Claude y, como respaldo, filtro de noticias: titulares de las últimas 24 h puntuados con palabras clave fijas (sin IA). Con 2 o más negativos no se compra. No se puede probar con backtest (no hay histórico de titulares gratis). |
 | `moneyprinter/broker.py` | `PaperBroker`: compra un 0,05 % más caro, vende un 0,05 % más barato y cobra un 0,1 % en cada lado. Aquí se enchufará Alpaca. |

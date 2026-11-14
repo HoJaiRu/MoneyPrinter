@@ -23,7 +23,7 @@ rsi_salida = 60               # vende cuando el RSI pasa de 60 (rebote completad
 [riesgo]
 max_por_activo_pct = 30       # nunca más del 30 % de la cartera en un mismo activo (era 20 %; subido a petición de HoJaiRu el 14-nov-2026)
 min_liquidez_pct = 10         # siempre al menos un 10 % en efectivo
-freno_emergencia_pct = 15     # si cae un 15 % desde el máximo: no abre más operaciones y avisa
+freno_emergencia_pct = 40     # si cae un 40 % desde el máximo: no abre más operaciones y avisa (era 15 %; subido por HoJaiRu el 14-nov-2026)
 comision_pct = 0.1            # comisión simulada por lado (compra y venta)
 deslizamiento_pct = 0.05      # deslizamiento simulado por lado (precio algo peor que el visto)
 orden_minima_usd = { acciones = 1.0, cripto = 5.0 }   # mínimos reales: fracciones de acción ~1 $, Binance 5 USDT
