@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Money Printer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Barra superior: nombre, aviso de dinero ficticio y estado del bot -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"></span>
+      <h1>Money Printer</h1>
+      <span class="pill pill-paper" title="Ninguna operación usa dinero real">Dinero ficticio</span>
+    </div>
+    <div class="status">
+      <span id="bot-status" class="pill">Cargando…</span>
+      <span id="updated" class="muted small"></span>
+    </div>
+  </header>
+
+  <div id="load-error" class="banner banner-loss" hidden></div>
+  <div id="brake-banner" class="banner banner-loss" hidden></div>
+  <div id="bench-banner" class="banner" hidden></div>
+
+  <!-- 1. Cabecera de cifras -->
+  <section class="kpis" aria-label="Resumen">
+    <div class="kpi">
+      <span class="kpi-label">Balance</span>
+      <span id="kpi-balance" class="kpi-value">–</span>
+      <span id="kpi-balance-sub" class="kpi-sub"></span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">P&amp;L total</span>
+      <span id="kpi-pnl" class="kpi-value">–</span>
+      <span id="kpi-pnl-sub" class="kpi-sub"></span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label" id="kpi-bench-label">Frente al índice</span>
+      <span id="kpi-bench" class="kpi-value">–</span>
+      <span id="kpi-bench-sub" class="kpi-sub"></span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Aciertos</span>
+      <span id="kpi-win" class="kpi-value">–</span>
+      <span id="kpi-win-sub" class="kpi-sub"></span>
+    </div>
+  </section>
+
+  <!-- 2. Barra de agresividad -->
+  <section class="card" aria-labelledby="aggr-title">
+    <div class="card-head">
+      <h2 id="aggr-title">Agresividad</h2>
+      <span class="muted small">Todos los niveles respetan los límites de riesgo</span>
+    </div>
+    <div id="aggr-levels" class="segmented" role="radiogroup" aria-label="Nivel de agresividad"></div>
+    <div class="aggr-body">
+      <dl class="aggr-params">
+        <div><dt>Tamaño por operación</dt><dd id="lv-size">–</dd></div>
+        <div><dt>Stop-loss</dt><dd id="lv-stop">–</dd></div>
+        <div><dt>Operaciones abiertas máx.</dt><dd id="lv-max">–</dd></div>
+        <div><dt>Invertido máx. / liquidez mín.</dt><dd id="lv-inv">–</dd></div>
+      </dl>
+      <div class="aggr-loss">
+        <span class="kpi-label">Pérdida máxima esperada</span>
+        <span id="lv-loss" class="loss-value">–</span>
+        <div class="meter" aria-hidden="true"><span id="lv-meter"></span><i id="lv-brake-mark"></i></div>
+        <p id="lv-loss-note" class="small muted"></p>
+      </div>
+    </div>
+    <p id="lv-summary" class="small"></p>
+    <p id="lv-pending" class="small note" hidden></p>
+  </section>
+
+  <!-- 3. Gráfica central -->
+  <section class="card" aria-labelledby="chart-title">
+    <div class="card-head">
+      <h2 id="chart-title">Evolución de la cartera</h2>
+      <div class="range" role="group" aria-label="Periodo">
+        <button type="button" data-range="30">1 M</button>
+        <button type="button" data-range="90">3 M</button>
+        <button type="button" data-range="0" class="active">Todo</button>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="sw sw-port"></i>Cartera del bot</span>
+      <span><i class="sw sw-bench"></i><span id="legend-bench">Índice</span></span>
+      <span><i class="sw sw-init"></i>Capital inicial</span>
+    </div>
+    <div class="chart-box"><canvas id="equity-chart" aria-label="Gráfica de la cartera frente al índice y al capital inicial" role="img"></canvas></div>
+  </section>
+
+  <!-- 4. Mejoras -->
+  <section class="card" aria-labelledby="learn-title">
+    <div class="card-head">
+      <h2 id="learn-title">Mejoras</h2>
+      <span id="learn-rule" class="muted small"></span>
+    </div>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-obs" aria-selected="true" aria-controls="panel-obs">Aprendiendo <span id="count-obs" class="count"></span></button>
+      <button type="button" role="tab" id="tab-ok" aria-selected="false" aria-controls="panel-ok">Ya aprendido <span id="count-ok" class="count"></span></button>
+    </div>
+    <div id="panel-obs" role="tabpanel" aria-labelledby="tab-obs" class="learn-list"></div>
+    <div id="panel-ok" role="tabpanel" aria-labelledby="tab-ok" class="learn-list" hidden></div>
+  </section>
+
+  <!-- 5. Desplegables -->
+  <details class="card fold">
+    <summary><h2>Posiciones abiertas</h2><span id="pos-count" class="muted small"></span></summary>
+    <div class="table-scroll"><table id="pos-table"></table></div>
+  </details>
+
+  <details class="card fold">
+    <summary><h2>Historial de operaciones</h2><span id="trades-count" class="muted small"></span></summary>
+    <div class="table-scroll"><table id="trades-table"></table></div>
+  </details>
+
+  <details class="card fold">
+    <summary><h2>Registro del bot</h2><span id="logs-count" class="muted small"></span></summary>
+    <ul id="logs" class="logs"></ul>
+  </details>
+
+  <details class="card fold">
+    <summary><h2>Límites de riesgo</h2><span class="muted small">fijos en todos los niveles</span></summary>
+    <ul id="limits" class="limits"></ul>
+  </details>
+
+  <footer class="foot small muted">
+    <p>Simulación con dinero ficticio y precios reales de mercado. No es asesoramiento financiero: los resultados pasados no garantizan resultados futuros y se muestran también las pérdidas.</p>
+    <p id="sample-note"></p>
+  </footer>
+</div>
+
+<!-- Chart.js (gratuito, licencia MIT) desde CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

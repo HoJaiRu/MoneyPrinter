@@ -1,0 +1,19 @@
+# Secretos: NUNCA se suben al repositorio
+.env
+.env.*
+!.env.example
+
+# Python (para el bot, más adelante)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Base de datos local del bot
+*.sqlite
+*.sqlite3
+*.db
+
+# Sistema
+.DS_Store
+Thumbs.db
