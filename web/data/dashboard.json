@@ -1,0 +1,1268 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "generated_at": "2026-11-13T21:05:00Z",
+    "is_sample_data": true,
+    "mode": "paper",
+    "currency": "USD",
+    "bot_status": "running",
+    "strategy": "Medias 20/50 + RSI(14) v0.1",
+    "benchmark": {
+      "symbol": "SPY",
+      "name": "S&P 500 (comprar y mantener)"
+    }
+  },
+  "account": {
+    "initial_capital": 1000.0,
+    "balance": 1014.82,
+    "cash": 713.92,
+    "invested": 300.9,
+    "peak_equity": 1049.77,
+    "drawdown_from_peak_pct": -3.33
+  },
+  "stats": {
+    "total_pnl": 14.82,
+    "realized_pnl": 13.92,
+    "unrealized_pnl": 0.9,
+    "return_pct": 1.48,
+    "benchmark_return_pct": 6.8,
+    "trades_closed": 24,
+    "wins": 13,
+    "losses": 11,
+    "win_rate_pct": 54.2,
+    "fees_paid": 7.2
+  },
+  "risk_limits": {
+    "max_per_asset_pct": 20,
+    "min_cash_pct": 10,
+    "emergency_brake_drawdown_pct": 15,
+    "stop_loss_required": true,
+    "leverage": false,
+    "short_selling": false,
+    "fee_pct_per_side": 0.1,
+    "slippage_pct_per_side": 0.05
+  },
+  "emergency_brake": {
+    "active": false,
+    "triggered_at": null
+  },
+  "aggressiveness": {
+    "current": "equilibrado",
+    "levels": [
+      {
+        "id": "muy_prudente",
+        "name": "Muy prudente",
+        "position_size_pct": 5,
+        "stop_loss_pct": 3,
+        "max_open_trades": 3,
+        "summary": "Pocas operaciones pequeñas. Mueve poco la cartera, para bien y para mal."
+      },
+      {
+        "id": "prudente",
+        "name": "Prudente",
+        "position_size_pct": 8,
+        "stop_loss_pct": 4,
+        "max_open_trades": 4,
+        "summary": "Algo más de exposición, stop cercano."
+      },
+      {
+        "id": "equilibrado",
+        "name": "Equilibrado",
+        "position_size_pct": 10,
+        "stop_loss_pct": 5,
+        "max_open_trades": 6,
+        "summary": "Hasta 6 posiciones del 10 %. Es el nivel con el que se generaron estos datos."
+      },
+      {
+        "id": "agresivo",
+        "name": "Agresivo",
+        "position_size_pct": 15,
+        "stop_loss_pct": 7,
+        "max_open_trades": 6,
+        "summary": "Hasta el 90 % invertido (el máximo permitido). Más ganancia posible y más pérdida posible."
+      },
+      {
+        "id": "maximo",
+        "name": "Máximo",
+        "position_size_pct": 20,
+        "stop_loss_pct": 8,
+        "max_open_trades": 4,
+        "summary": "Posiciones del 20 % (el tope por activo) y stop más lejano. Las rachas malas se notan mucho."
+      }
+    ]
+  },
+  "equity_curve": [
+    {
+      "date": "2026-07-17",
+      "portfolio": 1000.0,
+      "benchmark": 1000.0
+    },
+    {
+      "date": "2026-07-18",
+      "portfolio": 1003.25,
+      "benchmark": 995.85
+    },
+    {
+      "date": "2026-07-19",
+      "portfolio": 1005.73,
+      "benchmark": 989.69
+    },
+    {
+      "date": "2026-07-20",
+      "portfolio": 1005.17,
+      "benchmark": 987.13
+    },
+    {
+      "date": "2026-07-21",
+      "portfolio": 1013.2,
+      "benchmark": 984.48
+    },
+    {
+      "date": "2026-07-22",
+      "portfolio": 1013.85,
+      "benchmark": 998.45
+    },
+    {
+      "date": "2026-07-23",
+      "portfolio": 1014.8,
+      "benchmark": 987.35
+    },
+    {
+      "date": "2026-07-24",
+      "portfolio": 1019.87,
+      "benchmark": 986.61
+    },
+    {
+      "date": "2026-07-25",
+      "portfolio": 1018.49,
+      "benchmark": 987.56
+    },
+    {
+      "date": "2026-07-26",
+      "portfolio": 1021.84,
+      "benchmark": 968.86
+    },
+    {
+      "date": "2026-07-27",
+      "portfolio": 1026.2,
+      "benchmark": 958.03
+    },
+    {
+      "date": "2026-07-28",
+      "portfolio": 1031.44,
+      "benchmark": 961.74
+    },
+    {
+      "date": "2026-07-29",
+      "portfolio": 1032.48,
+      "benchmark": 951.74
+    },
+    {
+      "date": "2026-07-30",
+      "portfolio": 1040.96,
+      "benchmark": 951.2
+    },
+    {
+      "date": "2026-07-31",
+      "portfolio": 1040.0,
+      "benchmark": 947.87
+    },
+    {
+      "date": "2026-08-01",
+      "portfolio": 1039.09,
+      "benchmark": 939.39
+    },
+    {
+      "date": "2026-08-02",
+      "portfolio": 1036.18,
+      "benchmark": 930.29
+    },
+    {
+      "date": "2026-08-03",
+      "portfolio": 1034.65,
+      "benchmark": 928.21
+    },
+    {
+      "date": "2026-08-04",
+      "portfolio": 1036.71,
+      "benchmark": 939.41
+    },
+    {
+      "date": "2026-08-05",
+      "portfolio": 1037.6,
+      "benchmark": 934.77
+    },
+    {
+      "date": "2026-08-06",
+      "portfolio": 1032.64,
+      "benchmark": 948.09
+    },
+    {
+      "date": "2026-08-07",
+      "portfolio": 1033.49,
+      "benchmark": 934.42
+    },
+    {
+      "date": "2026-08-08",
+      "portfolio": 1029.97,
+      "benchmark": 933.61
+    },
+    {
+      "date": "2026-08-09",
+      "portfolio": 1031.44,
+      "benchmark": 943.54
+    },
+    {
+      "date": "2026-08-10",
+      "portfolio": 1039.17,
+      "benchmark": 957.71
+    },
+    {
+      "date": "2026-08-11",
+      "portfolio": 1047.53,
+      "benchmark": 952.06
+    },
+    {
+      "date": "2026-08-12",
+      "portfolio": 1046.92,
+      "benchmark": 954.54
+    },
+    {
+      "date": "2026-08-13",
+      "portfolio": 1049.77,
+      "benchmark": 957.46
+    },
+    {
+      "date": "2026-08-14",
+      "portfolio": 1042.66,
+      "benchmark": 954.3
+    },
+    {
+      "date": "2026-08-15",
+      "portfolio": 1042.64,
+      "benchmark": 955.21
+    },
+    {
+      "date": "2026-08-16",
+      "portfolio": 1039.81,
+      "benchmark": 955.19
+    },
+    {
+      "date": "2026-08-17",
+      "portfolio": 1036.07,
+      "benchmark": 958.14
+    },
+    {
+      "date": "2026-08-18",
+      "portfolio": 1035.8,
+      "benchmark": 951.02
+    },
+    {
+      "date": "2026-08-19",
+      "portfolio": 1036.96,
+      "benchmark": 938.45
+    },
+    {
+      "date": "2026-08-20",
+      "portfolio": 1037.31,
+      "benchmark": 941.93
+    },
+    {
+      "date": "2026-08-21",
+      "portfolio": 1036.89,
+      "benchmark": 938.93
+    },
+    {
+      "date": "2026-08-22",
+      "portfolio": 1040.26,
+      "benchmark": 936.25
+    },
+    {
+      "date": "2026-08-23",
+      "portfolio": 1036.71,
+      "benchmark": 924.62
+    },
+    {
+      "date": "2026-08-24",
+      "portfolio": 1027.05,
+      "benchmark": 934.55
+    },
+    {
+      "date": "2026-08-25",
+      "portfolio": 1017.88,
+      "benchmark": 947.2
+    },
+    {
+      "date": "2026-08-26",
+      "portfolio": 1021.27,
+      "benchmark": 952.54
+    },
+    {
+      "date": "2026-08-27",
+      "portfolio": 1031.87,
+      "benchmark": 951.18
+    },
+    {
+      "date": "2026-08-28",
+      "portfolio": 1031.26,
+      "benchmark": 958.76
+    },
+    {
+      "date": "2026-08-29",
+      "portfolio": 1029.47,
+      "benchmark": 956.13
+    },
+    {
+      "date": "2026-08-30",
+      "portfolio": 1031.87,
+      "benchmark": 931.39
+    },
+    {
+      "date": "2026-08-31",
+      "portfolio": 1032.45,
+      "benchmark": 933.11
+    },
+    {
+      "date": "2026-09-01",
+      "portfolio": 1035.37,
+      "benchmark": 935.23
+    },
+    {
+      "date": "2026-09-02",
+      "portfolio": 1037.2,
+      "benchmark": 930.93
+    },
+    {
+      "date": "2026-09-03",
+      "portfolio": 1043.01,
+      "benchmark": 922.08
+    },
+    {
+      "date": "2026-09-04",
+      "portfolio": 1049.7,
+      "benchmark": 925.81
+    },
+    {
+      "date": "2026-09-05",
+      "portfolio": 1045.16,
+      "benchmark": 922.85
+    },
+    {
+      "date": "2026-09-06",
+      "portfolio": 1039.27,
+      "benchmark": 927.03
+    },
+    {
+      "date": "2026-09-07",
+      "portfolio": 1040.23,
+      "benchmark": 921.57
+    },
+    {
+      "date": "2026-09-08",
+      "portfolio": 1040.94,
+      "benchmark": 932.75
+    },
+    {
+      "date": "2026-09-09",
+      "portfolio": 1039.43,
+      "benchmark": 942.54
+    },
+    {
+      "date": "2026-09-10",
+      "portfolio": 1034.7,
+      "benchmark": 943.57
+    },
+    {
+      "date": "2026-09-11",
+      "portfolio": 1024.97,
+      "benchmark": 941.94
+    },
+    {
+      "date": "2026-09-12",
+      "portfolio": 1024.45,
+      "benchmark": 942.29
+    },
+    {
+      "date": "2026-09-13",
+      "portfolio": 1015.68,
+      "benchmark": 936.6
+    },
+    {
+      "date": "2026-09-14",
+      "portfolio": 1011.14,
+      "benchmark": 946.1
+    },
+    {
+      "date": "2026-09-15",
+      "portfolio": 1009.57,
+      "benchmark": 942.97
+    },
+    {
+      "date": "2026-09-16",
+      "portfolio": 1008.56,
+      "benchmark": 942.54
+    },
+    {
+      "date": "2026-09-17",
+      "portfolio": 1002.97,
+      "benchmark": 956.38
+    },
+    {
+      "date": "2026-09-18",
+      "portfolio": 1004.57,
+      "benchmark": 954.83
+    },
+    {
+      "date": "2026-09-19",
+      "portfolio": 991.99,
+      "benchmark": 958.38
+    },
+    {
+      "date": "2026-09-20",
+      "portfolio": 986.69,
+      "benchmark": 957.49
+    },
+    {
+      "date": "2026-09-21",
+      "portfolio": 987.35,
+      "benchmark": 957.05
+    },
+    {
+      "date": "2026-09-22",
+      "portfolio": 991.8,
+      "benchmark": 959.14
+    },
+    {
+      "date": "2026-09-23",
+      "portfolio": 987.66,
+      "benchmark": 960.11
+    },
+    {
+      "date": "2026-09-24",
+      "portfolio": 986.78,
+      "benchmark": 953.53
+    },
+    {
+      "date": "2026-09-25",
+      "portfolio": 986.77,
+      "benchmark": 959.14
+    },
+    {
+      "date": "2026-09-26",
+      "portfolio": 990.15,
+      "benchmark": 965.14
+    },
+    {
+      "date": "2026-09-27",
+      "portfolio": 995.63,
+      "benchmark": 977.79
+    },
+    {
+      "date": "2026-09-28",
+      "portfolio": 997.81,
+      "benchmark": 969.47
+    },
+    {
+      "date": "2026-09-29",
+      "portfolio": 996.96,
+      "benchmark": 969.0
+    },
+    {
+      "date": "2026-09-30",
+      "portfolio": 1003.76,
+      "benchmark": 973.47
+    },
+    {
+      "date": "2026-10-01",
+      "portfolio": 994.69,
+      "benchmark": 982.65
+    },
+    {
+      "date": "2026-10-02",
+      "portfolio": 993.9,
+      "benchmark": 977.15
+    },
+    {
+      "date": "2026-10-03",
+      "portfolio": 992.01,
+      "benchmark": 975.84
+    },
+    {
+      "date": "2026-10-04",
+      "portfolio": 991.25,
+      "benchmark": 972.21
+    },
+    {
+      "date": "2026-10-05",
+      "portfolio": 991.94,
+      "benchmark": 983.79
+    },
+    {
+      "date": "2026-10-06",
+      "portfolio": 1004.43,
+      "benchmark": 988.09
+    },
+    {
+      "date": "2026-10-07",
+      "portfolio": 1006.79,
+      "benchmark": 984.97
+    },
+    {
+      "date": "2026-10-08",
+      "portfolio": 1005.12,
+      "benchmark": 986.22
+    },
+    {
+      "date": "2026-10-09",
+      "portfolio": 1002.34,
+      "benchmark": 997.01
+    },
+    {
+      "date": "2026-10-10",
+      "portfolio": 1007.79,
+      "benchmark": 992.25
+    },
+    {
+      "date": "2026-10-11",
+      "portfolio": 1007.34,
+      "benchmark": 993.16
+    },
+    {
+      "date": "2026-10-12",
+      "portfolio": 1014.15,
+      "benchmark": 989.6
+    },
+    {
+      "date": "2026-10-13",
+      "portfolio": 1009.84,
+      "benchmark": 991.31
+    },
+    {
+      "date": "2026-10-14",
+      "portfolio": 1011.98,
+      "benchmark": 988.64
+    },
+    {
+      "date": "2026-10-15",
+      "portfolio": 1016.44,
+      "benchmark": 994.43
+    },
+    {
+      "date": "2026-10-16",
+      "portfolio": 1016.97,
+      "benchmark": 987.16
+    },
+    {
+      "date": "2026-10-17",
+      "portfolio": 1021.34,
+      "benchmark": 981.29
+    },
+    {
+      "date": "2026-10-18",
+      "portfolio": 1019.91,
+      "benchmark": 990.04
+    },
+    {
+      "date": "2026-10-19",
+      "portfolio": 1019.6,
+      "benchmark": 995.77
+    },
+    {
+      "date": "2026-10-20",
+      "portfolio": 1019.01,
+      "benchmark": 992.58
+    },
+    {
+      "date": "2026-10-21",
+      "portfolio": 1021.46,
+      "benchmark": 999.46
+    },
+    {
+      "date": "2026-10-22",
+      "portfolio": 1026.14,
+      "benchmark": 1006.78
+    },
+    {
+      "date": "2026-10-23",
+      "portfolio": 1025.4,
+      "benchmark": 1006.86
+    },
+    {
+      "date": "2026-10-24",
+      "portfolio": 1021.39,
+      "benchmark": 1010.74
+    },
+    {
+      "date": "2026-10-25",
+      "portfolio": 1024.2,
+      "benchmark": 1011.98
+    },
+    {
+      "date": "2026-10-26",
+      "portfolio": 1029.18,
+      "benchmark": 1014.11
+    },
+    {
+      "date": "2026-10-27",
+      "portfolio": 1028.06,
+      "benchmark": 1016.11
+    },
+    {
+      "date": "2026-10-28",
+      "portfolio": 1032.54,
+      "benchmark": 1023.01
+    },
+    {
+      "date": "2026-10-29",
+      "portfolio": 1030.26,
+      "benchmark": 1017.82
+    },
+    {
+      "date": "2026-10-30",
+      "portfolio": 1025.42,
+      "benchmark": 1031.32
+    },
+    {
+      "date": "2026-10-31",
+      "portfolio": 1024.58,
+      "benchmark": 1028.54
+    },
+    {
+      "date": "2026-11-01",
+      "portfolio": 1029.24,
+      "benchmark": 1038.27
+    },
+    {
+      "date": "2026-11-02",
+      "portfolio": 1029.94,
+      "benchmark": 1041.61
+    },
+    {
+      "date": "2026-11-03",
+      "portfolio": 1030.27,
+      "benchmark": 1048.73
+    },
+    {
+      "date": "2026-11-04",
+      "portfolio": 1030.78,
+      "benchmark": 1055.22
+    },
+    {
+      "date": "2026-11-05",
+      "portfolio": 1031.74,
+      "benchmark": 1055.76
+    },
+    {
+      "date": "2026-11-06",
+      "portfolio": 1029.45,
+      "benchmark": 1070.04
+    },
+    {
+      "date": "2026-11-07",
+      "portfolio": 1022.97,
+      "benchmark": 1071.22
+    },
+    {
+      "date": "2026-11-08",
+      "portfolio": 1024.26,
+      "benchmark": 1065.39
+    },
+    {
+      "date": "2026-11-09",
+      "portfolio": 1020.93,
+      "benchmark": 1063.31
+    },
+    {
+      "date": "2026-11-10",
+      "portfolio": 1019.81,
+      "benchmark": 1042.25
+    },
+    {
+      "date": "2026-11-11",
+      "portfolio": 1014.67,
+      "benchmark": 1045.29
+    },
+    {
+      "date": "2026-11-12",
+      "portfolio": 1014.22,
+      "benchmark": 1057.95
+    },
+    {
+      "date": "2026-11-13",
+      "portfolio": 1014.82,
+      "benchmark": 1068.0
+    }
+  ],
+  "positions": [
+    {
+      "symbol": "MSFT",
+      "market": "acciones",
+      "qty": 0.2312,
+      "entry_price": 432.6,
+      "current_price": 441.68,
+      "stop_loss": 410.97,
+      "opened_at": "2026-11-07T15:30:00Z",
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "value": 102.1,
+      "unrealized_pnl": 2.1
+    },
+    {
+      "symbol": "BTCUSDT",
+      "market": "cripto",
+      "qty": 0.001428,
+      "entry_price": 70040.0,
+      "current_price": 68779.28,
+      "stop_loss": 66538.0,
+      "opened_at": "2026-11-10T15:30:00Z",
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "value": 98.2,
+      "unrealized_pnl": -1.8
+    },
+    {
+      "symbol": "GOOGL",
+      "market": "acciones",
+      "qty": 0.5645,
+      "entry_price": 177.16,
+      "current_price": 178.22,
+      "stop_loss": 168.3,
+      "opened_at": "2026-11-12T15:30:00Z",
+      "entry_reason": "Ruptura del máximo de 20 días",
+      "value": 100.6,
+      "unrealized_pnl": 0.6
+    }
+  ],
+  "trades": [
+    {
+      "id": 24,
+      "symbol": "AMZN",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-10-20T17:30:00Z",
+      "closed_at": "2026-10-29T14:15:00Z",
+      "qty": 0.4753,
+      "entry_price": 210.38,
+      "exit_price": 217.95,
+      "stop_loss": 199.87,
+      "fees": 0.31,
+      "pnl": 3.29,
+      "pnl_pct": 3.29,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "RSI(14) > 70 (sobrecompra)"
+    },
+    {
+      "id": 23,
+      "symbol": "NVDA",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-10-16T18:30:00Z",
+      "closed_at": "2026-10-22T17:00:00Z",
+      "qty": 0.6904,
+      "entry_price": 144.84,
+      "exit_price": 156.43,
+      "stop_loss": 137.6,
+      "fees": 0.31,
+      "pnl": 7.69,
+      "pnl_pct": 7.69,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "Take-profit +8 %"
+    },
+    {
+      "id": 22,
+      "symbol": "BTCUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-10-14T14:15:00Z",
+      "closed_at": "2026-10-17T18:45:00Z",
+      "qty": 0.001372,
+      "entry_price": 72884.56,
+      "exit_price": 68904.84,
+      "stop_loss": 69240.33,
+      "fees": 0.29,
+      "pnl": -5.75,
+      "pnl_pct": -5.75,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "Stop-loss alcanzado"
+    },
+    {
+      "id": 21,
+      "symbol": "MSFT",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-10-08T14:00:00Z",
+      "closed_at": "2026-10-17T14:15:00Z",
+      "qty": 0.2517,
+      "entry_price": 397.31,
+      "exit_price": 409.35,
+      "stop_loss": 377.44,
+      "fees": 0.3,
+      "pnl": 2.73,
+      "pnl_pct": 2.73,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "RSI(14) > 70 (sobrecompra)"
+    },
+    {
+      "id": 20,
+      "symbol": "AAPL",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-10-05T17:00:00Z",
+      "closed_at": "2026-10-13T15:00:00Z",
+      "qty": 0.4462,
+      "entry_price": 224.14,
+      "exit_price": 219.2,
+      "stop_loss": 212.93,
+      "fees": 0.3,
+      "pnl": -2.5,
+      "pnl_pct": -2.5,
+      "entry_reason": "Ruptura del máximo de 20 días",
+      "exit_reason": "Cruce de medias SMA 20/50 a la baja"
+    },
+    {
+      "id": 19,
+      "symbol": "SOLUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-10-02T18:00:00Z",
+      "closed_at": "2026-10-09T17:45:00Z",
+      "qty": 0.621603,
+      "entry_price": 160.87,
+      "exit_price": 152.0,
+      "stop_loss": 152.83,
+      "fees": 0.29,
+      "pnl": -5.81,
+      "pnl_pct": -5.81,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "Stop-loss alcanzado"
+    },
+    {
+      "id": 18,
+      "symbol": "ETHUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-09-28T14:15:00Z",
+      "closed_at": "2026-10-02T17:30:00Z",
+      "qty": 0.039979,
+      "entry_price": 2501.3,
+      "exit_price": 2701.41,
+      "stop_loss": 2376.24,
+      "fees": 0.31,
+      "pnl": 7.69,
+      "pnl_pct": 7.69,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "Take-profit +8 %"
+    },
+    {
+      "id": 16,
+      "symbol": "AMZN",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-09-20T19:45:00Z",
+      "closed_at": "2026-09-26T15:15:00Z",
+      "qty": 0.4964,
+      "entry_price": 201.44,
+      "exit_price": 194.46,
+      "stop_loss": 191.37,
+      "fees": 0.29,
+      "pnl": -3.76,
+      "pnl_pct": -3.76,
+      "entry_reason": "Ruptura del máximo de 20 días",
+      "exit_reason": "Cruce de medias SMA 20/50 a la baja"
+    },
+    {
+      "id": 17,
+      "symbol": "GOOGL",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-09-22T19:15:00Z",
+      "closed_at": "2026-09-26T14:45:00Z",
+      "qty": 0.6157,
+      "entry_price": 162.4,
+      "exit_price": 175.4,
+      "stop_loss": 154.28,
+      "fees": 0.31,
+      "pnl": 7.69,
+      "pnl_pct": 7.69,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "Take-profit +8 %"
+    },
+    {
+      "id": 15,
+      "symbol": "BTCUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-09-15T16:15:00Z",
+      "closed_at": "2026-09-18T20:45:00Z",
+      "qty": 0.001554,
+      "entry_price": 64370.07,
+      "exit_price": 66499.04,
+      "stop_loss": 61151.56,
+      "fees": 0.3,
+      "pnl": 3.0,
+      "pnl_pct": 3.0,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "RSI(14) > 70 (sobrecompra)"
+    },
+    {
+      "id": 13,
+      "symbol": "MSFT",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-09-07T17:30:00Z",
+      "closed_at": "2026-09-15T15:00:00Z",
+      "qty": 0.2242,
+      "entry_price": 446.01,
+      "exit_price": 459.66,
+      "stop_loss": 423.71,
+      "fees": 0.3,
+      "pnl": 2.76,
+      "pnl_pct": 2.76,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "RSI(14) > 70 (sobrecompra)"
+    },
+    {
+      "id": 14,
+      "symbol": "NVDA",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-09-11T19:15:00Z",
+      "closed_at": "2026-09-13T17:45:00Z",
+      "qty": 0.7757,
+      "entry_price": 128.91,
+      "exit_price": 122.19,
+      "stop_loss": 122.47,
+      "fees": 0.29,
+      "pnl": -5.51,
+      "pnl_pct": -5.51,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "Stop-loss alcanzado"
+    },
+    {
+      "id": 12,
+      "symbol": "SOLUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-09-03T19:30:00Z",
+      "closed_at": "2026-09-12T19:45:00Z",
+      "qty": 0.646291,
+      "entry_price": 154.73,
+      "exit_price": 146.92,
+      "stop_loss": 146.99,
+      "fees": 0.29,
+      "pnl": -5.34,
+      "pnl_pct": -5.34,
+      "entry_reason": "Ruptura del máximo de 20 días",
+      "exit_reason": "Stop-loss alcanzado"
+    },
+    {
+      "id": 11,
+      "symbol": "AAPL",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-08-31T17:00:00Z",
+      "closed_at": "2026-09-09T20:00:00Z",
+      "qty": 0.4331,
+      "entry_price": 230.91,
+      "exit_price": 249.39,
+      "stop_loss": 219.37,
+      "fees": 0.31,
+      "pnl": 7.69,
+      "pnl_pct": 7.69,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "Take-profit +8 %"
+    },
+    {
+      "id": 10,
+      "symbol": "ETHUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-08-26T18:30:00Z",
+      "closed_at": "2026-08-28T16:30:00Z",
+      "qty": 0.035814,
+      "entry_price": 2792.2,
+      "exit_price": 2758.86,
+      "stop_loss": 2652.59,
+      "fees": 0.3,
+      "pnl": -1.49,
+      "pnl_pct": -1.49,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "Cruce de medias SMA 20/50 a la baja"
+    },
+    {
+      "id": 9,
+      "symbol": "GOOGL",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-08-22T20:30:00Z",
+      "closed_at": "2026-08-25T15:45:00Z",
+      "qty": 0.6192,
+      "entry_price": 161.49,
+      "exit_price": 152.91,
+      "stop_loss": 153.41,
+      "fees": 0.29,
+      "pnl": -5.61,
+      "pnl_pct": -5.61,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "Stop-loss alcanzado"
+    },
+    {
+      "id": 8,
+      "symbol": "BTCUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-08-19T16:45:00Z",
+      "closed_at": "2026-08-24T16:45:00Z",
+      "qty": 0.001576,
+      "entry_price": 63450.58,
+      "exit_price": 68526.63,
+      "stop_loss": 60278.05,
+      "fees": 0.31,
+      "pnl": 7.69,
+      "pnl_pct": 7.69,
+      "entry_reason": "Ruptura del máximo de 20 días",
+      "exit_reason": "Take-profit +8 %"
+    },
+    {
+      "id": 7,
+      "symbol": "AMZN",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-08-14T16:15:00Z",
+      "closed_at": "2026-08-23T20:15:00Z",
+      "qty": 0.5059,
+      "entry_price": 197.67,
+      "exit_price": 204.67,
+      "stop_loss": 187.79,
+      "fees": 0.31,
+      "pnl": 3.23,
+      "pnl_pct": 3.23,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "RSI(14) > 70 (sobrecompra)"
+    },
+    {
+      "id": 6,
+      "symbol": "SOLUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-08-10T14:15:00Z",
+      "closed_at": "2026-08-13T17:45:00Z",
+      "qty": 0.661613,
+      "entry_price": 151.15,
+      "exit_price": 143.52,
+      "stop_loss": 143.59,
+      "fees": 0.29,
+      "pnl": -5.34,
+      "pnl_pct": -5.34,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "Stop-loss alcanzado"
+    },
+    {
+      "id": 5,
+      "symbol": "NVDA",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-08-07T19:15:00Z",
+      "closed_at": "2026-08-13T14:15:00Z",
+      "qty": 0.7337,
+      "entry_price": 136.3,
+      "exit_price": 147.21,
+      "stop_loss": 129.49,
+      "fees": 0.31,
+      "pnl": 7.69,
+      "pnl_pct": 7.69,
+      "entry_reason": "Ruptura del máximo de 20 días",
+      "exit_reason": "Take-profit +8 %"
+    },
+    {
+      "id": 4,
+      "symbol": "ETHUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-08-01T16:45:00Z",
+      "closed_at": "2026-08-06T15:00:00Z",
+      "qty": 0.04147,
+      "entry_price": 2411.38,
+      "exit_price": 2275.28,
+      "stop_loss": 2290.81,
+      "fees": 0.29,
+      "pnl": -5.94,
+      "pnl_pct": -5.94,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "Stop-loss alcanzado"
+    },
+    {
+      "id": 3,
+      "symbol": "MSFT",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-07-28T18:00:00Z",
+      "closed_at": "2026-07-31T18:45:00Z",
+      "qty": 0.2222,
+      "entry_price": 450.07,
+      "exit_price": 469.59,
+      "stop_loss": 427.57,
+      "fees": 0.31,
+      "pnl": 4.03,
+      "pnl_pct": 4.03,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "Cruce de medias SMA 20/50 a la baja"
+    },
+    {
+      "id": 2,
+      "symbol": "BTCUSDT",
+      "market": "cripto",
+      "side": "long",
+      "opened_at": "2026-07-26T14:15:00Z",
+      "closed_at": "2026-07-31T14:45:00Z",
+      "qty": 0.001588,
+      "entry_price": 62967.95,
+      "exit_price": 59614.76,
+      "stop_loss": 59819.56,
+      "fees": 0.29,
+      "pnl": -5.62,
+      "pnl_pct": -5.62,
+      "entry_reason": "Cruce de medias SMA 20/50 al alza",
+      "exit_reason": "Stop-loss alcanzado"
+    },
+    {
+      "id": 1,
+      "symbol": "AAPL",
+      "market": "acciones",
+      "side": "long",
+      "opened_at": "2026-07-21T20:00:00Z",
+      "closed_at": "2026-07-25T16:00:00Z",
+      "qty": 0.4461,
+      "entry_price": 224.16,
+      "exit_price": 228.01,
+      "stop_loss": 212.96,
+      "fees": 0.3,
+      "pnl": 1.41,
+      "pnl_pct": 1.41,
+      "entry_reason": "RSI(14) < 30 (sobreventa)",
+      "exit_reason": "RSI(14) > 70 (sobrecompra)"
+    }
+  ],
+  "learning": {
+    "min_trades": 20,
+    "min_weeks": 4,
+    "observing": [
+      {
+        "id": "obs-1",
+        "title": "Los stops en SOL saltan más de lo normal",
+        "detail": "3 de 3 entradas en SOLUSDT terminaron en stop-loss. Puede que un stop del 5 % sea demasiado corto para su volatilidad.",
+        "trades": 3,
+        "weeks": 9,
+        "since": "2026-07-22",
+        "metric": "Tasa de acierto en SOLUSDT: 0 %",
+        "proposal": "Probar stop basado en ATR solo para cripto"
+      },
+      {
+        "id": "obs-2",
+        "title": "Las rupturas del máximo de 20 días aciertan menos",
+        "detail": "Las entradas por ruptura tienen menos aciertos que las de RSI. Aún hay pocas operaciones para saber si es real o ruido.",
+        "trades": 6,
+        "weeks": 13,
+        "since": "2026-07-18",
+        "metric": "Acierto ruptura: 33 % frente a 67 % del RSI",
+        "proposal": "Exigir volumen mayor que su media de 20 días"
+      },
+      {
+        "id": "obs-3",
+        "title": "Las salidas por cruce bajista llegan tarde",
+        "detail": "Cuando el cruce 20/50 a la baja cierra la operación, el precio ya ha bajado bastante desde el máximo.",
+        "trades": 4,
+        "weeks": 6,
+        "since": "2026-09-30",
+        "metric": "Retroceso medio antes de salir: −3,1 %",
+        "proposal": "Añadir un stop dinámico (trailing) del 4 %"
+      }
+    ],
+    "learned": [
+      {
+        "id": "rule-1",
+        "title": "No abrir compras en las 2 h previas a datos macro (IPC, Fed)",
+        "kind": "evitar",
+        "detail": "Las entradas justo antes de estos datos acabaron en stop con mucha más frecuencia.",
+        "evidence": {
+          "trades": 26,
+          "weeks": 11,
+          "metric": "Stop-loss: 58 % cerca de datos macro frente a 31 % el resto"
+        },
+        "confirmed_at": "2026-10-28",
+        "status": "active"
+      },
+      {
+        "id": "rule-2",
+        "title": "Priorizar RSI < 30 en acciones grandes frente a cripto",
+        "kind": "priorizar",
+        "detail": "La señal de sobreventa rebota mejor en acciones de gran capitalización.",
+        "evidence": {
+          "trades": 22,
+          "weeks": 8,
+          "metric": "Acierto: 71 % en acciones frente a 44 % en cripto"
+        },
+        "confirmed_at": "2026-10-15",
+        "status": "active"
+      },
+      {
+        "id": "rule-3",
+        "title": "Evitar entradas en fin de semana en cripto",
+        "kind": "evitar",
+        "detail": "Se confirmó en septiembre, pero en las últimas 4 semanas ya no se cumple. Vuelve a observación.",
+        "evidence": {
+          "trades": 21,
+          "weeks": 6,
+          "metric": "Últimas 4 semanas: el acierto en fin de semana igualó al de diario"
+        },
+        "confirmed_at": "2026-09-12",
+        "status": "back_to_observation"
+      }
+    ]
+  },
+  "logs": [
+    {
+      "ts": "2026-11-13T21:05:00Z",
+      "level": "info",
+      "message": "Ciclo completado: 8 activos analizados, 0 señales nuevas."
+    },
+    {
+      "ts": "2026-11-13T21:04:58Z",
+      "level": "info",
+      "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+    },
+    {
+      "ts": "2026-11-13T20:05:02Z",
+      "level": "warning",
+      "message": "Binance tardó 4,2 s en responder. Reintento correcto."
+    },
+    {
+      "ts": "2026-11-13T19:05:00Z",
+      "level": "info",
+      "message": "GOOGL: stop-loss sigue a 5 % por debajo de la entrada, sin cambios."
+    },
+    {
+      "ts": "2026-11-12T15:30:00Z",
+      "level": "info",
+      "message": "COMPRA GOOGL: ruptura del máximo de 20 días. Tamaño 10 %, stop 5 %."
+    },
+    {
+      "ts": "2026-11-12T14:00:00Z",
+      "level": "info",
+      "message": "Mercado de acciones fuera de horario: solo se analiza cripto."
+    },
+    {
+      "ts": "2026-11-11T09:12:44Z",
+      "level": "error",
+      "message": "Yahoo Finance devolvió error 429 (demasiadas peticiones). Se usó el último precio guardado."
+    },
+    {
+      "ts": "2026-11-10T18:00:00Z",
+      "level": "info",
+      "message": "COMPRA BTCUSDT: RSI(14) < 30. Tamaño 10 %, stop 5 %."
+    },
+    {
+      "ts": "2026-11-09T08:00:00Z",
+      "level": "info",
+      "message": "Bot reiniciado tras actualización. Estado recuperado de la base de datos."
+    }
+  ]
+}
