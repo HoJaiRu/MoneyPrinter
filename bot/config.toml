@@ -7,15 +7,18 @@ moneda = "USD"
 activo = true                 # false = el bot sigue leyendo precios pero no abre ni cierra nada (pausa)
 
 [estrategia]
-nombre = "cruce_medias"       # archivo en bot/moneyprinter/strategies/ (estrategias intercambiables)
+nombre = "rsi_rebote"         # archivo en bot/moneyprinter/strategies/ (estrategias intercambiables)
 version = "v1.0"
 temporalidad = "1h"           # velas de 1 hora
 
 [estrategia.parametros]
-rapida = 20                   # SMA rápida (20 velas)
-lenta = 50                    # SMA lenta (50 velas)
 rsi_periodo = 14
-rsi_max_entrada = 70          # no compra si el RSI ya está en sobrecompra
+rsi_sobreventa = 30           # compra cuando el RSI vuelve a subir por encima de 30...
+media_tendencia = 200         # ...solo si el precio está por encima de su media de 200 velas (tendencia de fondo alcista)
+rsi_salida = 60               # vende cuando el RSI pasa de 60 (rebote completado); si no, actúa el stop-loss
+
+# Alternativa probada en el backtest (no activa):
+#   nombre = "cruce_medias"  con  rapida = 20, lenta = 50, rsi_periodo = 14, rsi_max_entrada = 70
 
 [riesgo]
 max_por_activo_pct = 20       # nunca más del 20 % de la cartera en un mismo activo

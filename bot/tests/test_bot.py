@@ -104,6 +104,7 @@ def v_bars(n, step, end, crash=False):
 
 
 def test_buy_then_stop_loss_between_cycles(tmp_path, cfg):
+    cfg["estrategia"] = {"nombre": "cruce_medias", "version": "test", "temporalidad": "1h", "parametros": {}}
     store = Store(tmp_path / "s.sqlite")
     t1, t2 = pd.Timestamp("2026-11-14T16:30Z"), pd.Timestamp("2026-11-14T17:30Z")
     engine.run_cycle(cfg, store, now=t1, fetch=lambda s, m, i, n: v_bars(150, "1h" if i == "1h" else "5min", "2026-11-14T16:00Z"))

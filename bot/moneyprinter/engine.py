@@ -145,7 +145,9 @@ def run_cycle(cfg, store, now=None, fetch=data.bars) -> dict:
         if not sig or str(sig.bar_time) == store.signal_used(sym):
             continue
         if not tradable:
-            log("info", f"Señal de compra en {sym} ({sig.reason}), pero su mercado está cerrado. Se revisará al abrir.")
+            if store.get(f"closed_note:{sym}") != str(sig.bar_time):   # se anota una sola vez por señal
+                store.set(f"closed_note:{sym}", str(sig.bar_time))
+                log("info", f"Señal de compra en {sym} ({sig.reason}), pero su mercado está cerrado. Se revisará al abrir.")
             continue
         if not active:
             log("info", f"Señal de compra en {sym} ({sig.reason}). Bot en pausa: no se compra.")
