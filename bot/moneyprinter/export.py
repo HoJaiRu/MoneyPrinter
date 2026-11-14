@@ -80,6 +80,7 @@ def build_dashboard(cfg, store, now=None) -> dict:
         "positions": positions,
         "trades": [{k: (r2(v, 6) if isinstance(v, float) else v) for k, v in t.__dict__.items()} for t in reversed(pf.trades)],
         "learning": {"min_trades": 20, "min_weeks": 4, "observing": [], "learned": []},
+        "research": store.get("study"),
         "logs": store.logs(80),
     }
 

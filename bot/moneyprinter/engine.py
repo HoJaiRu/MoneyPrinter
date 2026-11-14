@@ -123,6 +123,16 @@ def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check) -> d
         else:
             pos.last_check = ts
 
+    # Estudio de Claude (si lo hay y es reciente): se anota en el registro cada vez que llega uno nuevo
+    study = news.load_study(cfg) if news_check is news.check else None
+    if study and study.get("generado") != store.get("study_seen"):
+        store.set("study_seen", study["generado"])
+        store.set("study", study)
+        log("info", "Estudio nuevo de Claude: " + str(study.get("mercado", ""))[:400])
+        for s_, a_ in study.get("activos", {}).items():
+            log("warning" if a_.get("veredicto") == "evitar" else "info",
+                f"Estudio {s_}: {news.LABEL.get(a_.get('veredicto'), '?')}. {str(a_.get('tesis', ''))[:300]}")
+
     # 4-5. Estrategia + riesgo
     for sym, mkt in universe(cfg):
         df = frames.get(sym)
@@ -160,16 +170,15 @@ def run_cycle(cfg, store, now=None, fetch=data.bars, news_check=news.check) -> d
             log("info", f"Señal de compra en {sym} ({sig.reason}), pero no se compra: {why}.")
             continue
         # Estudio previo de la compra: noticias, coste y riesgo. Queda escrito en el registro.
-        verdict = news_check(sym, mkt, cfg)
+        verdict = news_check(sym, mkt, cfg, study) if news_check is news.check else news_check(sym, mkt, cfg)
         costs = 2 * (cfg["riesgo"]["comision_pct"] + cfg["riesgo"]["deslizamiento_pct"])
-        study = (f"{verdict.summary}. Necesita subir un {fmt(costs)} % para cubrir costes; "
+        nota = (f"{verdict.summary[:300]}. Necesita subir un {fmt(costs)} % para cubrir costes; "
                  f"si toca el stop pierde unos {fmt(size * (stop_pct + costs) / 100)} $")
         if not verdict.ok:
-            log("warning", f"Compra de {sym} DESCARTADA por noticias ({sig.reason}). {verdict.summary}. "
-                           f"Titular: «{verdict.negatives[0][:120]}»")
+            log("warning", f"Compra de {sym} DESCARTADA por el estudio previo ({sig.reason}). {verdict.summary[:400]}")
             continue
-        log("info", f"Estudio de {sym}: {study}.")
-        pos = pf.open(broker, sym, mkt, size, prices[sym], stop_pct, ts, f"{sig.reason} · {verdict.summary}", sig.bar_time)
+        log("info", f"Estudio previo de {sym}: {nota}.")
+        pos = pf.open(broker, sym, mkt, size, prices[sym], stop_pct, ts, f"{sig.reason} · {verdict.summary[:260]}", sig.bar_time)
         summary["buys"] += 1
         log("info", f"COMPRA {sym}: {fmt(size)} $ a {fmt(pos.entry_price)} $ ({sig.reason}). Stop en {fmt(pos.stop_loss)} $.")
 

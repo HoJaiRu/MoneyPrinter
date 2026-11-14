@@ -37,13 +37,14 @@ def make_fetch(drift=0.0, low_override=None):
 def cfg():
     c = config.load()
     c["noticias"]["activo"] = False      # las pruebas no usan internet
+    c["estudio"]["activo"] = False
     return c
 
 
 def test_config_limits(cfg):
     assert cfg["cartera"]["capital_inicial"] == 50
     for lv in cfg["agresividad"]["niveles"]:
-        assert lv["tamano_pct"] <= 20 and lv["stop_pct"] > 0
+        assert lv["tamano_pct"] <= 30 and lv["stop_pct"] > 0
 
 
 def test_broker_costs():
@@ -57,7 +58,7 @@ def test_broker_costs():
 def test_order_size_respects_limits(cfg):
     pf = Portfolio(50, 50, peak_equity=50)
     size, why = risk.order_size(pf, {}, "cripto", cfg)
-    assert why is None and size == 10.0              # nivel Máximo: 20 % de 50 = 10 $
+    assert why is None and size == 15.0              # nivel Máximo: 30 % de 50 = 15 $
     pf.cash = 6.0                                     # casi sin efectivo: no puede bajar del 10 % de liquidez
     pf.positions = {}
     size, why = risk.order_size(pf, {}, "cripto", cfg)
@@ -88,7 +89,7 @@ def test_cycle_and_export(tmp_path, cfg):
     assert abs(d["stats"]["total_pnl"] - (d["stats"]["realized_pnl"] + d["stats"]["unrealized_pnl"])) < 0.001
     for p in d["positions"]:
         assert p["stop_loss"] < p["entry_price"] and p["entry_reason"]
-        assert p["value"] <= 0.2 * 50 + 0.5
+        assert p["value"] <= 0.3 * 50 + 0.5
     assert d["account"]["cash"] >= 0.1 * d["account"]["balance"] - 0.01
     assert s["errors"] == 0
 
@@ -120,7 +121,7 @@ def test_buy_then_stop_loss_between_cycles(tmp_path, cfg):
     assert len(pf2.trades) == 3 and all(t.exit_reason.startswith("Stop-loss") for t in pf2.trades)
     for t in pf2.trades:
         assert t.exit_price < t.stop_loss and t.pnl < 0   # vende al stop (menos deslizamiento): pérdida real
-        assert -8.6 < t.pnl_pct < -8                       # −8 % del stop + comisiones y deslizamiento
+        assert -15.6 < t.pnl_pct < -15                     # −15 % del stop + comisiones y deslizamiento
 
 
 def test_backtest_runs(cfg):
@@ -150,4 +151,13 @@ def test_news_veto_blocks_buy(tmp_path, cfg):
     engine.run_cycle(cfg, store, now=pd.Timestamp("2026-11-14T16:30Z"), news_check=veto,
                      fetch=lambda s, m, i, n: v_bars(150, "1h" if i == "1h" else "5min", "2026-11-14T16:00Z"))
     assert not store.load_portfolio().positions
-    assert any("DESCARTADA por noticias" in l["message"] for l in store.logs())
+    assert any("DESCARTADA por el estudio previo" in l["message"] for l in store.logs())
+
+
+def test_claude_study_gates_buy(cfg):
+    study = {"generado": "2026-11-14T20:00:00Z", "activos": {"BTCUSDT": {"veredicto": "evitar", "tesis": "Salidas de ETF."},
+                                                               "NVDA": {"veredicto": "comprar", "tesis": "Expectativas bajas."}}}
+    assert not news.check("BTCUSDT", "cripto", cfg, study).ok
+    v = news.check("NVDA", "acciones", cfg, study)
+    assert v.ok and "favorable" in v.summary
+    assert news.check("AAPL", "acciones", cfg, study).ok       # sin estudio para AAPL: respaldo (desactivado en pruebas)

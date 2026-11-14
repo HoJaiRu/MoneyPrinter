@@ -69,7 +69,39 @@ def judge(titles: list[str], max_negative: int) -> Verdict:
     return Verdict(len(neg) < max_negative or len(neg) <= len(pos), summary, neg)
 
 
-def check(symbol: str, market: str, cfg: dict) -> Verdict:
+def load_study(cfg: dict) -> dict | None:
+    """Descarga el estudio de Claude (research/estudio.json). Devuelve None si no hay o está caducado."""
+    e = cfg.get("estudio", {})
+    if not e.get("activo", False):
+        return None
+    try:
+        import requests
+        r = requests.get(e["url"], timeout=15)
+        r.raise_for_status()
+        st = r.json()
+        made = datetime.fromisoformat(st["generado"].replace("Z", "+00:00"))
+        age_h = (datetime.now(timezone.utc) - made).total_seconds() / 3600
+        return st if age_h <= float(e.get("validez_horas", 30)) else None
+    except Exception:
+        return None
+
+
+LABEL = {"comprar": "favorable", "neutral": "neutral", "evitar": "EVITAR"}
+
+
+def check(symbol: str, market: str, cfg: dict, study: dict | None = None) -> Verdict:
+    """Primero el estudio de Claude; si no hay uno reciente para el activo, el filtro de titulares."""
+    a = (study or {}).get("activos", {}).get(symbol)
+    if a and a.get("veredicto") in LABEL:
+        when = study["generado"][:16].replace("T", " ")
+        summary = f"Estudio de Claude ({when} UTC): {LABEL[a['veredicto']]}. {a.get('tesis', '')}".strip()
+        return Verdict(a["veredicto"] != "evitar", summary, [a.get("tesis", "")])
+    v = _keywords(symbol, market, cfg)
+    v.summary = "Sin estudio reciente de Claude. " + v.summary
+    return v
+
+
+def _keywords(symbol: str, market: str, cfg: dict) -> Verdict:
     n = cfg.get("noticias", {})
     if not n.get("activo", False):
         return Verdict(True, "filtro de noticias desactivado")
