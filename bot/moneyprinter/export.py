@@ -81,6 +81,7 @@ def build_dashboard(cfg, store, now=None) -> dict:
         "trades": [{k: (r2(v, 6) if isinstance(v, float) else v) for k, v in t.__dict__.items()} for t in reversed(pf.trades)],
         "learning": {"min_trades": 20, "min_weeks": 4, "observing": [], "learned": []},
         "research": store.get("study"),
+        "pending": [{"symbol": k, **v} for k, v in (store.get("pending", {}) or {}).items()],
         "logs": store.logs(80),
     }
 

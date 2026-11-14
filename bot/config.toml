@@ -73,11 +73,18 @@ resumen = "Tres posiciones del 30 % (90 % invertido, el tope) con stop del 15 %.
 
 [estudio]
 # Estudio a fondo de cada activo hecho por Claude (fuera del bot: el código sigue sin llevar IA).
-# Claude lo escribe en research/estudio.json y el bot lo descarga en cada ciclo. Si el veredicto de un
-# activo es "evitar", no se compra. Si el estudio tiene más de `validez_horas`, se usa el filtro de titulares.
+# Claude lo escribe en research/estudio.json y el bot lo descarga en cada ciclo.
+#  - Cuando hay señal de compra o de venta, el bot NO opera todavía: deja la operación "en espera" y
+#    Claude la estudia en su siguiente revisión (cada hora). Solo se ejecuta con un estudio de ese activo
+#    de menos de `frescura_min` minutos. Veredicto "evitar" = no se compra. Salida "mantener" = no se vende.
+#  - Una venta espera como mucho `espera_venta_min`; si no llega estudio, se vende igualmente.
+#  - El stop-loss no espera nunca.
+#  - Si Claude lleva más de `validez_horas` sin escribir nada, el bot opera solo con el filtro de titulares.
 activo = true
 url = "https://raw.githubusercontent.com/HoJaiRu/MoneyPrinter/claude/project-thread-dktsei/research/estudio.json"
 validez_horas = 30
+frescura_min = 75
+espera_venta_min = 70
 
 [noticias]
 activo = true                 # respaldo: titulares de Yahoo Finance si no hay estudio reciente

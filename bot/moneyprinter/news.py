@@ -89,11 +89,25 @@ def load_study(cfg: dict) -> dict | None:
 LABEL = {"comprar": "favorable", "neutral": "neutral", "evitar": "EVITAR"}
 
 
+def studied_at(study: dict, symbol: str) -> datetime:
+    """Cuándo estudió Claude ESE activo (campo `estudiado`); si no lo trae, la fecha general del estudio."""
+    a = study.get("activos", {}).get(symbol) or {}
+    return datetime.fromisoformat((a.get("estudiado") or study["generado"]).replace("Z", "+00:00"))
+
+
+def fresh(study: dict | None, symbol: str, cfg: dict, now) -> bool:
+    """¿Hay un estudio de ese activo hecho en los últimos `frescura_min` minutos?"""
+    if not study or symbol not in study.get("activos", {}):
+        return False
+    age_min = (now - studied_at(study, symbol)).total_seconds() / 60
+    return age_min <= float(cfg.get("estudio", {}).get("frescura_min", 75))
+
+
 def check(symbol: str, market: str, cfg: dict, study: dict | None = None) -> Verdict:
     """Primero el estudio de Claude; si no hay uno reciente para el activo, el filtro de titulares."""
     a = (study or {}).get("activos", {}).get(symbol)
     if a and a.get("veredicto") in LABEL:
-        when = study["generado"][:16].replace("T", " ")
+        when = studied_at(study, symbol).strftime("%Y-%m-%d %H:%M")
         summary = f"Estudio de Claude ({when} UTC): {LABEL[a['veredicto']]}. {a.get('tesis', '')}".strip()
         return Verdict(a["veredicto"] != "evitar", summary, [a.get("tesis", "")])
     v = _keywords(symbol, market, cfg)
