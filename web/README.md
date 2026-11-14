@@ -1,6 +1,6 @@
 # Money Printer · dashboard (prototipo)
 
-Web estática del bot de trading. **Dinero ficticio.** Ahora mismo muestra **datos de prueba** inventados (con pérdidas incluidas).
+Web estática del bot de trading. **Dinero ficticio, precios reales.** Lee el `dashboard.json` que el bot escribe cada hora en la rama `bot-data`.
 
 ## Qué hace cada archivo
 
@@ -10,7 +10,7 @@ Web estática del bot de trading. **Dinero ficticio.** Ahora mismo muestra **dat
 | `css/styles.css` | El aspecto: colores del modo oscuro, tipografías, tamaños y versión móvil. |
 | `js/config.js` | La configuración. Dice **de dónde leer los datos** (`dataUrl`) y cada cuántos segundos refrescar. Es lo único que se toca al pasar a datos reales. |
 | `js/app.js` | La lógica: pide el JSON, calcula formatos (USD, %), pinta la gráfica con Chart.js y rellena tablas y pestañas. No opera ni decide nada. |
-| `data/dashboard.json` | Los datos de prueba. Su forma es el **contrato**: el bot en Python tendrá que devolver un JSON con esta misma estructura. |
+| `data/dashboard.json` | Los antiguos datos de prueba. Ya no se usan, pero su forma sigue siendo el **contrato** que cumple el bot. |
 
 ## Cómo se comunican las piezas
 

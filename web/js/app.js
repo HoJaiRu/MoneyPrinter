@@ -71,7 +71,7 @@
     $("updated").textContent = "Actualizado " + fdate(m.generated_at, true);
     $("sample-note").textContent = m.is_sample_data
       ? "Ahora mismo se muestran DATOS DE PRUEBA inventados. Cuando el bot esté conectado, esta nota desaparecerá."
-      : "Estrategia: " + m.strategy;
+      : "Estrategia: " + m.strategy + (m.started_at ? " · cartera iniciada el " + fdate(m.started_at, true) + " con " + usd.format(DATA.account.initial_capital) : "");
 
     const bb = $("brake-banner");
     bb.hidden = !brake.active;
@@ -169,7 +169,7 @@
     const pend = $("lv-pending");
     pend.hidden = lv.id === ag.current;
     pend.textContent = "Estás viendo «" + lv.name + "», pero el bot sigue en «" +
-      (ag.levels.find((l) => l.id === ag.current) || {}).name + "». En este prototipo el cambio no se guarda: más adelante se enviará al bot.";
+      (ag.levels.find((l) => l.id === ag.current) || {}).name + "». Desde la web no se cambia: el nivel se cambia en bot/config.toml y solo con tu aprobación.";
   }
 
   // ---------- 3. Gráfica ----------
@@ -182,7 +182,7 @@
     const c = { accent: css("--accent"), bench: css("--bench"), muted: css("--muted"), line: css("--line"), fg: css("--fg"), surface: css("--surface-2") };
 
     const datasets = [
-      { label: "Cartera del bot", data: pts.map((p) => p.portfolio), borderColor: c.accent, borderWidth: 2.2, pointRadius: 0, tension: 0.2,
+      { label: "Cartera del bot", data: pts.map((p) => p.portfolio), borderColor: c.accent, borderWidth: 2.2, pointRadius: pts.length < 15 ? 3 : 0, tension: 0.2,
         fill: { target: { value: init }, above: hexA(c.accent, 0.12), below: hexA(css("--loss"), 0.14) } },
       { label: DATA.meta.benchmark.name, data: pts.map((p) => p.benchmark), borderColor: c.bench, borderWidth: 1.6, borderDash: [5, 4], pointRadius: 0, tension: 0.2 },
       { label: "Capital inicial", data: pts.map(() => init), borderColor: c.muted, borderWidth: 1, borderDash: [2, 3], pointRadius: 0 }
@@ -249,7 +249,8 @@
       back.map((r) =>
       '<article class="item"><div class="item-head"><h3>' + esc(r.title) + '</h3><span class="tag tag-back">Volvió a observación</span></div>' +
       "<p>" + esc(r.detail) + "</p>" +
-      '<div class="metric">' + esc(r.evidence.metric) + "</div></article>").join("");
+      '<div class="metric">' + esc(r.evidence.metric) + "</div></article>").join("") ||
+      '<p class="muted small">Todavía no hay nada en observación. Hacen falta operaciones reales cerradas para detectar patrones.</p>';
 
     $("panel-ok").innerHTML = L.learned.filter((r) => r.status === "active").map((r) =>
       '<article class="item"><div class="item-head"><h3>' + esc(r.title) + "</h3>" +
@@ -279,7 +280,8 @@
         '</td><td class="r num">' + price(p.entry_price) + '</td><td class="r num">' + price(p.current_price) +
         '</td><td class="r num loss">' + price(p.stop_loss) + '</td><td class="r num">' + usd.format(p.value) +
         '</td><td class="r num ' + cls(p.unrealized_pnl) + '">' + money(p.unrealized_pnl) +
-        '</td><td class="reason">' + esc(p.entry_reason) + "</td></tr>").join("") + "</tbody>";
+        '</td><td class="reason">' + esc(p.entry_reason) + "</td></tr>").join("") +
+      (P.length ? "" : '<tr><td colspan="8" class="muted">Ahora mismo no hay posiciones abiertas: todo está en liquidez.</td></tr>') + "</tbody>";
   }
   function renderTrades() {
     const T = DATA.trades;
@@ -289,7 +291,8 @@
       T.map((t) => "<tr><td><b>" + esc(t.symbol) + '</b><span class="mkt">' + esc(t.market) + "</span></td><td>" + fdate(t.opened_at, true) +
         "</td><td>" + fdate(t.closed_at, true) + '</td><td class="r num">' + price(t.entry_price) + '</td><td class="r num">' + price(t.exit_price) +
         '</td><td class="r num muted">' + usd.format(t.fees) + '</td><td class="r num ' + cls(t.pnl) + '">' + money(t.pnl) + "<br><span class=small>" + pct(t.pnl_pct) + "</span>" +
-        '</td><td class="reason"><b>Entra:</b> ' + esc(t.entry_reason) + "<br><b>Sale:</b> " + esc(t.exit_reason) + "</td></tr>").join("") + "</tbody>";
+        '</td><td class="reason"><b>Entra:</b> ' + esc(t.entry_reason) + "<br><b>Sale:</b> " + esc(t.exit_reason) + "</td></tr>").join("") +
+      (T.length ? "" : '<tr><td colspan="8" class="muted">Todavía no se ha cerrado ninguna operación.</td></tr>') + "</tbody>";
   }
   function renderLogs() {
     const lg = DATA.logs;
