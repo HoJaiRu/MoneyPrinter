@@ -5,7 +5,10 @@ name: Bot (ciclo cada 30 min, dinero ficticio)
 
 on:
   schedule:
-    - cron: "7,37 * * * *"   # minutos 7 y 37 de cada hora (UTC). GitHub puede retrasarlo de 5 a 30 min.
+    # GitHub retrasa y se salta ejecuciones programadas (en la práctica lanzaba solo una por hora).
+    # Por eso se pide cada 10 minutos y el paso "guarda" descarta las que llegan antes de 25 minutos
+    # desde el último ciclo. Resultado: un ciclo cada 30 minutos aproximadamente.
+    - cron: "*/10 * * * *"
   workflow_dispatch:          # botón "Run workflow" en la pestaña Actions para lanzarlo a mano
 
 permissions:
@@ -36,20 +39,35 @@ jobs:
             mkdir state && git -C state init -b bot-data && git -C state remote add origin "$URL"
           fi
 
+      - name: Guarda (saltar si el último ciclo fue hace menos de 25 minutos)
+        id: guarda
+        run: |
+          RUN=true
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && git -C state rev-parse HEAD >/dev/null 2>&1; then
+            EDAD=$(( $(date +%s) - $(git -C state log -1 --format=%ct) ))
+            echo "Último ciclo hace $((EDAD/60)) minutos."
+            if [ "$EDAD" -lt 1500 ]; then RUN=false; echo "Demasiado pronto: se salta este ciclo."; fi
+          fi
+          echo "run=$RUN" >> "$GITHUB_OUTPUT"
+
       - uses: actions/setup-python@v5
+        if: steps.guarda.outputs.run == 'true'
         with:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: bot/requirements.txt
 
       - name: Instalar dependencias
+        if: steps.guarda.outputs.run == 'true'
         run: pip install -r bot/requirements.txt
 
       - name: Ejecutar un ciclo del bot
+        if: steps.guarda.outputs.run == 'true'
         working-directory: bot
         run: python -m moneyprinter run --state ../state --alert-file ../ALERTA
 
       - name: Guardar el estado en bot-data
+        if: steps.guarda.outputs.run == 'true'
         working-directory: state
         run: |
           git config user.name "moneyprinter-bot"
@@ -60,7 +78,7 @@ jobs:
           exit 1
 
       - name: Avisar si ha saltado el freno de emergencia
-        if: hashFiles('ALERTA') != ''
+        if: steps.guarda.outputs.run == 'true' && hashFiles('ALERTA') != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
