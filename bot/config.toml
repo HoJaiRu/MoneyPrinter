@@ -21,7 +21,7 @@ rsi_salida = 60               # vende cuando el RSI pasa de 60 (rebote completad
 #   nombre = "cruce_medias"  con  rapida = 20, lenta = 50, rsi_periodo = 14, rsi_max_entrada = 70
 
 [riesgo]
-max_por_activo_pct = 20       # nunca más del 20 % de la cartera en un mismo activo
+max_por_activo_pct = 30       # nunca más del 30 % de la cartera en un mismo activo (era 20 %; subido a petición de HoJaiRu el 14-nov-2026)
 min_liquidez_pct = 10         # siempre al menos un 10 % en efectivo
 freno_emergencia_pct = 15     # si cae un 15 % desde el máximo: no abre más operaciones y avisa
 comision_pct = 0.1            # comisión simulada por lado (compra y venta)
@@ -34,45 +34,53 @@ actual = "maximo"
 [[agresividad.niveles]]
 id = "muy_prudente"
 nombre = "Muy prudente"
-tamano_pct = 5
-stop_pct = 3
+tamano_pct = 10
+stop_pct = 5
 max_operaciones = 3
-resumen = "Pocas operaciones pequeñas. Mueve poco la cartera, para bien y para mal."
+resumen = "Tres posiciones del 10 % con stop del 5 %. El nivel más tranquilo, y aun así más cargado que antes."
 
 [[agresividad.niveles]]
 id = "prudente"
 nombre = "Prudente"
-tamano_pct = 8
-stop_pct = 4
+tamano_pct = 15
+stop_pct = 8
 max_operaciones = 4
-resumen = "Algo más de exposición, stop cercano."
+resumen = "Hasta 4 posiciones del 15 % con stop del 8 %."
 
 [[agresividad.niveles]]
 id = "equilibrado"
 nombre = "Equilibrado"
-tamano_pct = 10
-stop_pct = 5
-max_operaciones = 6
-resumen = "Hasta 6 posiciones del 10 % con stop del 5 %."
+tamano_pct = 20
+stop_pct = 10
+max_operaciones = 4
+resumen = "Hasta 4 posiciones del 20 % con stop del 10 %."
 
 [[agresividad.niveles]]
 id = "agresivo"
 nombre = "Agresivo"
-tamano_pct = 15
-stop_pct = 7
-max_operaciones = 6
-resumen = "Hasta el 90 % invertido (el máximo permitido). Más ganancia posible y más pérdida posible."
+tamano_pct = 25
+stop_pct = 12
+max_operaciones = 3
+resumen = "Hasta 3 posiciones del 25 % con stop del 12 %."
 
 [[agresividad.niveles]]
 id = "maximo"
 nombre = "Máximo"
-tamano_pct = 20
-stop_pct = 8
-max_operaciones = 4
-resumen = "Posiciones del 20 % (el tope por activo) y stop del 8 %. Es el nivel con el que opera el bot. Las rachas malas se notan mucho."
+tamano_pct = 30
+stop_pct = 15
+max_operaciones = 3
+resumen = "Tres posiciones del 30 % (90 % invertido, el tope) con stop del 15 %. Es el nivel con el que opera el bot. Tres stops seguidos rozan el freno de emergencia."
+
+[estudio]
+# Estudio a fondo de cada activo hecho por Claude (fuera del bot: el código sigue sin llevar IA).
+# Claude lo escribe en research/estudio.json y el bot lo descarga en cada ciclo. Si el veredicto de un
+# activo es "evitar", no se compra. Si el estudio tiene más de `validez_horas`, se usa el filtro de titulares.
+activo = true
+url = "https://raw.githubusercontent.com/HoJaiRu/MoneyPrinter/claude/project-thread-dktsei/research/estudio.json"
+validez_horas = 30
 
 [noticias]
-activo = true                 # lee titulares de Yahoo Finance antes de cada compra
+activo = true                 # respaldo: titulares de Yahoo Finance si no hay estudio reciente
 horas = 24                    # solo cuentan los titulares de las últimas 24 horas
 max_negativos = 2             # con 2 o más titulares negativos (y más negativos que positivos) NO se compra
 

@@ -41,8 +41,10 @@ def cmd_news(a, cfg):
     """Muestra qué titulares lee el bot ahora mismo y cómo los puntúa (para comprobar el filtro)."""
     from . import news
     from .engine import universe
+    study = news.load_study(cfg)
+    print("Estudio de Claude:", study["generado"] if study else "no hay uno reciente")
     for sym, mkt in universe(cfg):
-        v = news.check(sym, mkt, cfg)
+        v = news.check(sym, mkt, cfg, study)
         print(f"{sym}: {'OK' if v.ok else 'NO COMPRAR'} · {v.summary}")
         for t in v.negatives:
             print(f"    negativo: {t}")
