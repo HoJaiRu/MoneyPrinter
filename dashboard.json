@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-15T07:45:01Z",
+  "generated_at": "2026-11-15T08:33:55Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -127,61 +127,123 @@
   "learned": []
  },
  "research": {
-  "generado": "2026-11-14T19:44:45Z",
+  "generado": "2026-11-15T07:52:25Z",
   "autor": "Claude (estudio manual, fuera del bot)",
-  "mercado": "Semana de riesgo alto. La Fed va a subir tipos en diciembre (IPC caliente 3 meses seguidos), el bono a 10 años está sobre el 5 % y el dólar en máximos de 19 meses: menos liquidez para activos de riesgo. Nvidia presenta resultados el martes 17 tras el cierre, sin su CEO y con una investigación abierta; las opciones descuentan un movimiento de ±9 %. Bitcoin ha perdido su media de 200 semanas con salidas de ETF.",
+  "mercado": "Domingo, bolsas cerradas. El S&P 500 subió un 2,5 % la semana pasada (7.561) pese a un IPC caliente; el viernes la tecnología cayó un 2 % y el bono a 10 años cerró en 5,17 %. La subida de tipos de diciembre ya está descontada (88 %), así que el riesgo de la semana no es la Fed sino Nvidia (martes 17 tras el cierre, sin CEO), las actas de la Fed (miércoles) y la salida a bolsa de Anthropic (jueves 19). En cripto hay pánico: Bitcoin tocó 61.946 $ de madrugada y el índice de miedo está en 10.",
   "activos": {
    "NVDA": {
     "veredicto": "evitar",
-    "tesis": "Resultados el martes 17 tras el cierre con el CEO recién salido e investigación abierta. Las opciones descuentan ±9 %: es una apuesta a cara o cruz y un hueco puede saltarse el stop. Se revisa después de los resultados.",
-    "riesgos": "Perder el rebote si los resultados gustan."
+    "tesis": "Resultados el martes 17 tras el cierre, con el CEO dimitido el jueves y sexta semana seguida de caída (cerró a 162,85 $, un 30 % bajo su máximo). El consenso pide 109.000 M$ de ingresos y guía cerca de 125.000 M$. Los minoristas han concentrado en ella el 61 % de sus compras de la semana: mucha mano débil dentro. Es una apuesta a cara o cruz y un hueco puede saltarse el stop.",
+    "riesgos": "Perder el rebote si la guía convence.",
+    "estudiado": "2026-11-15T07:52:25Z"
    },
    "MSFT": {
-    "veredicto": "comprar",
-    "tesis": "La caída de Outlook es ruido operativo: el mercado suele olvidarlo en días. Si la técnica da señal, la caída por este motivo es comprable.",
-    "riesgos": "Arrastre de todo el sector IA si Nvidia decepciona el martes."
+    "veredicto": "neutral",
+    "tesis": "Sin noticia propia nueva. El ruido de Outlook ya pasó. Participa en la colocación privada de Anthropic, que fija precio el miércoles 18 y cotiza el jueves 19: puede dar titulares, pero el mercado ya lo sabe. Manda lo que pase con Nvidia el martes.",
+    "riesgos": "Arrastre del sector si Nvidia decepciona; bono a 10 años en 5,17 %.",
+    "estudiado": "2026-11-15T07:52:25Z"
    },
    "AAPL": {
     "veredicto": "neutral",
-    "tesis": "Actúa como refugio dentro de las grandes tecnológicas cuando se vende la IA. Sin catalizador propio esta semana.",
-    "riesgos": "Tipos al alza castigan valoraciones altas."
+    "tesis": "Sigue haciendo de refugio dentro de las grandes tecnológicas cuando se vende la IA. Sin catalizador propio esta semana.",
+    "riesgos": "Tipos al alza castigan valoraciones altas.",
+    "estudiado": "2026-11-15T07:52:25Z"
    },
    "AMZN": {
     "veredicto": "neutral",
-    "tesis": "Sin noticia propia. Se mueve con el debate del gasto en IA y con las ventas minoristas del martes.",
-    "riesgos": "Resultados de Nvidia y dato de ventas minoristas."
+    "tesis": "Semana de consumo: ventas minoristas el martes y resultados de Walmart y Home Depot. Es accionista relevante de Anthropic, cuya salida a bolsa del jueves puede revalorizar esa participación, aunque está descontado en buena parte.",
+    "riesgos": "Dato de ventas flojo o Nvidia arrastrando a todo el sector.",
+    "estudiado": "2026-11-15T07:52:25Z"
    },
    "GOOGL": {
     "veredicto": "neutral",
-    "tesis": "Fue la ganadora de la temporada de resultados, así que ya hay mucho optimismo en el precio. Sin catalizador propio.",
-    "riesgos": "Rotación fuera de la IA tras Nvidia."
+    "tesis": "Pone 10.000 M$ en la colocación de Anthropic. Fue la ganadora de la temporada de resultados y hay optimismo ya en el precio. Sin catalizador propio.",
+    "riesgos": "Rotación fuera de la IA tras Nvidia.",
+    "estudiado": "2026-11-15T07:52:25Z"
    },
    "BTCUSDT": {
     "veredicto": "neutral",
-    "tesis": "A favor: limpieza de apalancamiento (el 89 % de las liquidaciones fueron largos) y carteras de 100 a 10.000 BTC acumulando. En contra: salidas de ETF, pérdida de la media de 200 semanas (~68.000) y Fed subiendo tipos. Solo se compra si la técnica confirma el rebote.",
-    "riesgos": "Cierre semanal bajo 68.000 abre la zona 62.000-66.000."
+    "tesis": "Hay señales de capitulación: índice de miedo en 10, más de 2.000 M$ liquidados en 24 h (casi todo largos) y mínimo nocturno en 61.946 $ con rebote a 64.800 $. Eso suele preceder a rebotes. En contra, el vendedor de fondo sigue ahí: siete días de salidas de ETF (1.910 M$) y subida de tipos de la Fed en diciembre descontada al 88 %. Cierre semanal esta noche a las 00:00 UTC; el dato de ETF llega el lunes. Solo se compra si la técnica confirma.",
+    "riesgos": "Perder 60.000 $ abre el mínimo del año, 57.718 $.",
+    "estudiado": "2026-11-15T07:52:25Z"
    },
    "ETHUSDT": {
-    "veredicto": "neutral",
-    "tesis": "Ha caído más que Bitcoin esta semana (−14 %) y ha perdido los 2.000 $. En mercado miedoso suele sufrir más que BTC; rebotes posibles pero frágiles.",
-    "riesgos": "Más caída si BTC confirma la rotura."
+    "veredicto": "evitar",
+    "tesis": "En 1.792 $, cae más que Bitcoin y sus ETF perdieron 399 M$ en la semana. Si hay rebote, el dinero grande entra primero por Bitcoin, que es más líquido. No gasto una de las tres posiciones aquí hasta ver el cierre semanal de Bitcoin y los flujos del lunes.",
+    "riesgos": "Perder un rebote fuerte por cierre de cortos.",
+    "estudiado": "2026-11-15T07:52:25Z"
    },
    "SOLUSDT": {
-    "veredicto": "neutral",
-    "tesis": "En torno a 80 $, mínimos de varios meses. Mismo patrón que ETH: depende de que Bitcoin aguante.",
-    "riesgos": "Activo de más riesgo del grupo."
+    "veredicto": "evitar",
+    "tesis": "En 70 $ tras tocar 67,60 $, −20 % en la semana y siete sesiones de salidas de ETF. La financiación se ha vuelto negativa (muchos cortos), lo que puede dar un rebote violento, pero es el activo de más riesgo del grupo y con un stop del 15 % un mal día lo salta. Se revisa tras el cierre semanal de Bitcoin.",
+    "riesgos": "Rebote por cierre de cortos sin nosotros dentro.",
+    "estudiado": "2026-11-15T07:52:25Z"
    }
   },
   "fuentes": [
-   "https://bullwaves.com/blog-news/weekly-market-recap-9-15-november-2026",
-   "https://www.schwab.com/learn/story/weekly-traders-outlook",
-   "https://www.kiplinger.com/investing/economy/this-weeks-economic-calendar",
-   "https://earnings-watcher.com/wiki/nvda-earnings-november-2026",
-   "https://www.altcoinbuzz.io/bitcoin-breaks-below-200-week-average-as-etf-outflows-and-liquidations-grow"
+   "https://cardanocapital.substack.com/p/nasdaq-snaps-a-four-week-slide-up",
+   "https://cryptoticker.io/en/bitcoin-price-overnight-low-weekly-close-november-15-2026/",
+   "https://cryptoticker.io/en/solana-price-crash-67-dollars-76-percent-below-record-november-15-2026",
+   "https://www.stocktitan.net/articles/earnings-calendar-week-of-november-16-2026"
   ]
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "warning",
+   "message": "Estudio SOLUSDT: EVITAR. En 70 $ tras tocar 67,60 $, −20 % en la semana y siete sesiones de salidas de ETF. La financiación se ha vuelto negativa (muchos cortos), lo que puede dar un rebote violento, pero es el activo de más riesgo del grupo y con un stop del 15 % un mal día lo salta. Se revisa tras el cierre semanal de Bit"
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "warning",
+   "message": "Estudio ETHUSDT: EVITAR. En 1.792 $, cae más que Bitcoin y sus ETF perdieron 399 M$ en la semana. Si hay rebote, el dinero grande entra primero por Bitcoin, que es más líquido. No gasto una de las tres posiciones aquí hasta ver el cierre semanal de Bitcoin y los flujos del lunes."
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "info",
+   "message": "Estudio BTCUSDT: neutral. Hay señales de capitulación: índice de miedo en 10, más de 2.000 M$ liquidados en 24 h (casi todo largos) y mínimo nocturno en 61.946 $ con rebote a 64.800 $. Eso suele preceder a rebotes. En contra, el vendedor de fondo sigue ahí: siete días de salidas de ETF (1.910 M$) y subida de tipos de la Fed "
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "info",
+   "message": "Estudio GOOGL: neutral. Pone 10.000 M$ en la colocación de Anthropic. Fue la ganadora de la temporada de resultados y hay optimismo ya en el precio. Sin catalizador propio."
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "info",
+   "message": "Estudio AMZN: neutral. Semana de consumo: ventas minoristas el martes y resultados de Walmart y Home Depot. Es accionista relevante de Anthropic, cuya salida a bolsa del jueves puede revalorizar esa participación, aunque está descontado en buena parte."
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "info",
+   "message": "Estudio AAPL: neutral. Sigue haciendo de refugio dentro de las grandes tecnológicas cuando se vende la IA. Sin catalizador propio esta semana."
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "info",
+   "message": "Estudio MSFT: neutral. Sin noticia propia nueva. El ruido de Outlook ya pasó. Participa en la colocación privada de Anthropic, que fija precio el miércoles 18 y cotiza el jueves 19: puede dar titulares, pero el mercado ya lo sabe. Manda lo que pase con Nvidia el martes."
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "warning",
+   "message": "Estudio NVDA: EVITAR. Resultados el martes 17 tras el cierre, con el CEO dimitido el jueves y sexta semana seguida de caída (cerró a 162,85 $, un 30 % bajo su máximo). El consenso pide 109.000 M$ de ingresos y guía cerca de 125.000 M$. Los minoristas han concentrado en ella el 61 % de sus compras de la semana: mucha mano"
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "info",
+   "message": "Estudio nuevo de Claude: Domingo, bolsas cerradas. El S&P 500 subió un 2,5 % la semana pasada (7.561) pese a un IPC caliente; el viernes la tecnología cayó un 2 % y el bono a 10 años cerró en 5,17 %. La subida de tipos de diciembre ya está descontada (88 %), así que el riesgo de la semana no es la Fed sino Nvidia (martes 17 tras el cierre, sin CEO), las actas de la Fed (miércoles) y la salida a bolsa de Anthropic (jueves "
+  },
+  {
+   "ts": "2026-11-15T08:33:51Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-15T07:44:56Z",
    "level": "info",
