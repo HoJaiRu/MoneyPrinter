@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-15T18:21:49Z",
+  "generated_at": "2026-11-15T19:16:49Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -190,6 +190,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-15T19:16:43Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-15T19:16:43Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-15T18:21:45Z",
    "level": "info",
@@ -579,16 +589,6 @@
    "ts": "2026-11-14T19:47:14Z",
    "level": "info",
    "message": "Estudio AMZN: neutral. Sin noticia propia. Se mueve con el debate del gasto en IA y con las ventas minoristas del martes."
-  },
-  {
-   "ts": "2026-11-14T19:47:14Z",
-   "level": "info",
-   "message": "Estudio AAPL: neutral. Actúa como refugio dentro de las grandes tecnológicas cuando se vende la IA. Sin catalizador propio esta semana."
-  },
-  {
-   "ts": "2026-11-14T19:47:14Z",
-   "level": "info",
-   "message": "Estudio MSFT: favorable. La caída de Outlook es ruido operativo: el mercado suele olvidarlo en días. Si la técnica da señal, la caída por este motivo es comprable."
   }
  ]
 }
