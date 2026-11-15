@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-15T17:46:38Z",
+  "generated_at": "2026-11-15T18:21:49Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -190,6 +190,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-15T18:21:45Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-15T18:21:45Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-15T17:46:34Z",
    "level": "info",
@@ -579,16 +589,6 @@
    "ts": "2026-11-14T19:47:14Z",
    "level": "info",
    "message": "Estudio MSFT: favorable. La caída de Outlook es ruido operativo: el mercado suele olvidarlo en días. Si la técnica da señal, la caída por este motivo es comprable."
-  },
-  {
-   "ts": "2026-11-14T19:47:14Z",
-   "level": "warning",
-   "message": "Estudio NVDA: EVITAR. Resultados el martes 17 tras el cierre con el CEO recién salido e investigación abierta. Las opciones descuentan ±9 %: es una apuesta a cara o cruz y un hueco puede saltarse el stop. Se revisa después de los resultados."
-  },
-  {
-   "ts": "2026-11-14T19:47:14Z",
-   "level": "info",
-   "message": "Estudio nuevo de Claude: Semana de riesgo alto. La Fed va a subir tipos en diciembre (IPC caliente 3 meses seguidos), el bono a 10 años está sobre el 5 % y el dólar en máximos de 19 meses: menos liquidez para activos de riesgo. Nvidia presenta resultados el martes 17 tras el cierre, sin su CEO y con una investigación abierta; las opciones descuentan un movimiento de ±9 %. Bitcoin ha perdido su media de 200 semanas con sal"
   }
  ]
 }
