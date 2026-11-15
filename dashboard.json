@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-15T19:16:49Z",
+  "generated_at": "2026-11-15T19:58:24Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -190,6 +190,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-15T19:58:20Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-15T19:58:20Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-15T19:16:43Z",
    "level": "info",
@@ -579,16 +589,6 @@
    "ts": "2026-11-14T19:47:14Z",
    "level": "info",
    "message": "Estudio BTCUSDT: neutral. A favor: limpieza de apalancamiento (el 89 % de las liquidaciones fueron largos) y carteras de 100 a 10.000 BTC acumulando. En contra: salidas de ETF, pérdida de la media de 200 semanas (~68.000) y Fed subiendo tipos. Solo se compra si la técnica confirma el rebote."
-  },
-  {
-   "ts": "2026-11-14T19:47:14Z",
-   "level": "info",
-   "message": "Estudio GOOGL: neutral. Fue la ganadora de la temporada de resultados, así que ya hay mucho optimismo en el precio. Sin catalizador propio."
-  },
-  {
-   "ts": "2026-11-14T19:47:14Z",
-   "level": "info",
-   "message": "Estudio AMZN: neutral. Sin noticia propia. Se mueve con el debate del gasto en IA y con las ventas minoristas del martes."
   }
  ]
 }
