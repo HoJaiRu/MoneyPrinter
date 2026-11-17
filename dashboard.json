@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-17T12:21:39Z",
+  "generated_at": "2026-11-17T21:13:27Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -40,7 +40,7 @@
   "realized_pnl": 0.0,
   "unrealized_pnl": 0.0,
   "return_pct": 0.0,
-  "benchmark_return_pct": -1.88,
+  "benchmark_return_pct": -2.9,
   "trades_closed": 0,
   "wins": 0,
   "losses": 0,
@@ -125,7 +125,7 @@
   {
    "date": "2026-11-17",
    "portfolio": 50.0,
-   "benchmark": 49.06
+   "benchmark": 48.55
   }
  ],
  "positions": [],
@@ -200,6 +200,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-17T21:13:23Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-17T21:13:23Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-17T12:21:34Z",
    "level": "info",
@@ -589,16 +599,6 @@
    "ts": "2026-11-15T08:33:51Z",
    "level": "warning",
    "message": "Estudio NVDA: EVITAR. Resultados el martes 17 tras el cierre, con el CEO dimitido el jueves y sexta semana seguida de caída (cerró a 162,85 $, un 30 % bajo su máximo). El consenso pide 109.000 M$ de ingresos y guía cerca de 125.000 M$. Los minoristas han concentrado en ella el 61 % de sus compras de la semana: mucha mano"
-  },
-  {
-   "ts": "2026-11-15T08:33:51Z",
-   "level": "info",
-   "message": "Estudio nuevo de Claude: Domingo, bolsas cerradas. El S&P 500 subió un 2,5 % la semana pasada (7.561) pese a un IPC caliente; el viernes la tecnología cayó un 2 % y el bono a 10 años cerró en 5,17 %. La subida de tipos de diciembre ya está descontada (88 %), así que el riesgo de la semana no es la Fed sino Nvidia (martes 17 tras el cierre, sin CEO), las actas de la Fed (miércoles) y la salida a bolsa de Anthropic (jueves "
-  },
-  {
-   "ts": "2026-11-15T08:33:51Z",
-   "level": "info",
-   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
   }
  ]
 }
