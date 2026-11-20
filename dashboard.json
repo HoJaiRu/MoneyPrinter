@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-20T00:54:59Z",
+  "generated_at": "2026-11-20T08:06:44Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -215,6 +215,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-20T08:06:40Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-20T08:06:40Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-20T00:54:55Z",
    "level": "info",
@@ -602,16 +612,6 @@
   },
   {
    "ts": "2026-11-15T11:45:03Z",
-   "level": "info",
-   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
-  },
-  {
-   "ts": "2026-11-15T11:45:03Z",
-   "level": "info",
-   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
-  },
-  {
-   "ts": "2026-11-15T11:00:50Z",
    "level": "info",
    "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
   }
