@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-21T12:09:36Z",
+  "generated_at": "2026-11-21T19:14:22Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -220,6 +220,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-21T19:14:18Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-21T19:14:18Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-21T12:09:33Z",
    "level": "info",
@@ -609,16 +619,6 @@
    "ts": "2026-11-15T14:18:13Z",
    "level": "info",
    "message": "Estudio AMZN: neutral. Semana de consumo: ventas minoristas el martes y resultados de Walmart y Home Depot. Es accionista relevante de Anthropic, cuya salida a bolsa del jueves puede revalorizar esa participación, aunque está descontado en buena parte."
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "info",
-   "message": "Estudio AAPL: neutral. Sigue haciendo de refugio dentro de las grandes tecnológicas cuando se vende la IA. Sin catalizador propio esta semana."
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "info",
-   "message": "Estudio MSFT: neutral. Sin noticia propia nueva. El ruido de Outlook ya pasó. Participa en la colocación privada de Anthropic, que fija precio el miércoles 18 y cotiza el jueves 19: puede dar titulares, pero el mercado ya lo sabe. Manda lo que pase con Nvidia el martes."
   }
  ]
 }
