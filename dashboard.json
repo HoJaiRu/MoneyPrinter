@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-21T19:14:22Z",
+  "generated_at": "2026-11-21T23:50:39Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -220,6 +220,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-21T23:50:34Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-21T23:50:34Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-21T19:14:18Z",
    "level": "info",
@@ -609,16 +619,6 @@
    "ts": "2026-11-15T14:18:13Z",
    "level": "info",
    "message": "Estudio BTCUSDT: neutral. Rebote de 61.946 $ a unos 66.000 $ tras la limpieza de largos (más de 2.000 M$ liquidados) con el índice de miedo en 10 y el RSI diario saliendo de sobreventa (26). Es compatible con un suelo de corto plazo, pero el vendedor de fondo sigue: siete días de salidas de ETF (1.910 M$) y Fed subiendo tipo"
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "info",
-   "message": "Estudio GOOGL: neutral. Pone 10.000 M$ en la colocación de Anthropic. Fue la ganadora de la temporada de resultados y hay optimismo ya en el precio. Sin catalizador propio."
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "info",
-   "message": "Estudio AMZN: neutral. Semana de consumo: ventas minoristas el martes y resultados de Walmart y Home Depot. Es accionista relevante de Anthropic, cuya salida a bolsa del jueves puede revalorizar esa participación, aunque está descontado en buena parte."
   }
  ]
 }
