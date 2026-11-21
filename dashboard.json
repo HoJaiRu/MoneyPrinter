@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-20T22:58:51Z",
+  "generated_at": "2026-11-21T03:53:21Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -141,6 +141,11 @@
    "date": "2026-11-20",
    "portfolio": 50.0,
    "benchmark": 45.8
+  },
+  {
+   "date": "2026-11-21",
+   "portfolio": 50.0,
+   "benchmark": 45.8
   }
  ],
  "positions": [],
@@ -215,6 +220,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-21T03:53:18Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-21T03:53:18Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-20T22:58:46Z",
    "level": "info",
@@ -604,16 +619,6 @@
    "ts": "2026-11-15T14:18:13Z",
    "level": "info",
    "message": "Estudio nuevo de Claude: Domingo por la tarde, bolsas cerradas. Sin cambios en renta variable: el S&P 500 cerró la semana en 7.561 (+2,5 %), el viernes la tecnología cayó un 2 % y el bono a 10 años está en 5,17 %. La subida de tipos de diciembre está descontada; los riesgos de la semana son Nvidia (martes 17 tras el cierre, sin CEO), las actas de la Fed (miércoles), resultados de Walmart, Home Depot y Target, discurso del"
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "info",
-   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
-  },
-  {
-   "ts": "2026-11-15T13:27:18Z",
-   "level": "info",
-   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
   }
  ]
 }
