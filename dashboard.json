@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-21T03:53:21Z",
+  "generated_at": "2026-11-21T12:09:36Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -220,6 +220,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-21T12:09:33Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-21T12:09:33Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-21T03:53:18Z",
    "level": "info",
@@ -609,16 +619,6 @@
    "ts": "2026-11-15T14:18:13Z",
    "level": "info",
    "message": "Estudio MSFT: neutral. Sin noticia propia nueva. El ruido de Outlook ya pasó. Participa en la colocación privada de Anthropic, que fija precio el miércoles 18 y cotiza el jueves 19: puede dar titulares, pero el mercado ya lo sabe. Manda lo que pase con Nvidia el martes."
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "warning",
-   "message": "Estudio NVDA: EVITAR. Resultados el martes 17 tras el cierre, con el CEO dimitido el jueves y sexta semana seguida de caída (cerró a 162,85 $, un 30 % bajo su máximo). El consenso pide 109.000 M$ de ingresos y guía cerca de 125.000 M$. Los minoristas han concentrado en ella el 61 % de sus compras de la semana: mucha mano"
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "info",
-   "message": "Estudio nuevo de Claude: Domingo por la tarde, bolsas cerradas. Sin cambios en renta variable: el S&P 500 cerró la semana en 7.561 (+2,5 %), el viernes la tecnología cayó un 2 % y el bono a 10 años está en 5,17 %. La subida de tipos de diciembre está descontada; los riesgos de la semana son Nvidia (martes 17 tras el cierre, sin CEO), las actas de la Fed (miércoles), resultados de Walmart, Home Depot y Target, discurso del"
   }
  ]
 }
