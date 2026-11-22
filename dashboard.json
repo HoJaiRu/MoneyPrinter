@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-22T05:20:40Z",
+  "generated_at": "2026-11-22T13:30:50Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -226,6 +226,16 @@
  "pending": [],
  "logs": [
   {
+   "ts": "2026-11-22T13:30:46Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-22T13:30:46Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
+  {
    "ts": "2026-11-22T05:20:36Z",
    "level": "info",
    "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
@@ -614,16 +624,6 @@
    "ts": "2026-11-15T15:00:25Z",
    "level": "info",
    "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "info",
-   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "warning",
-   "message": "Estudio SOLUSDT: EVITAR. Apoyada en 67,50-70 $ tras caer un 20 % en la semana, con siete sesiones de salidas de ETF. Financiación negativa: puede rebotar fuerte por cierre de cortos, pero es el activo de más riesgo y un mal día salta el stop del 15 %. Mantengo evitar hasta el cierre semanal de Bitcoin."
   }
  ]
 }
