@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "meta": {
-  "generated_at": "2026-11-21T23:50:39Z",
+  "generated_at": "2026-11-22T05:20:40Z",
   "is_sample_data": false,
   "mode": "paper",
   "currency": "USD",
@@ -146,6 +146,11 @@
    "date": "2026-11-21",
    "portfolio": 50.0,
    "benchmark": 45.8
+  },
+  {
+   "date": "2026-11-22",
+   "portfolio": 50.0,
+   "benchmark": 45.8
   }
  ],
  "positions": [],
@@ -220,6 +225,16 @@
  },
  "pending": [],
  "logs": [
+  {
+   "ts": "2026-11-22T05:20:36Z",
+   "level": "info",
+   "message": "Ciclo completado: 8 activos analizados, 0 compras, 0 ventas. Cartera 50,00 $, 0 posiciones abiertas."
+  },
+  {
+   "ts": "2026-11-22T05:20:36Z",
+   "level": "info",
+   "message": "Precios actualizados (Yahoo Finance: 5 activos, Binance: 3 activos)."
+  },
   {
    "ts": "2026-11-21T23:50:34Z",
    "level": "info",
@@ -609,16 +624,6 @@
    "ts": "2026-11-15T14:18:13Z",
    "level": "warning",
    "message": "Estudio SOLUSDT: EVITAR. Apoyada en 67,50-70 $ tras caer un 20 % en la semana, con siete sesiones de salidas de ETF. Financiación negativa: puede rebotar fuerte por cierre de cortos, pero es el activo de más riesgo y un mal día salta el stop del 15 %. Mantengo evitar hasta el cierre semanal de Bitcoin."
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "warning",
-   "message": "Estudio ETHUSDT: EVITAR. Sigue por debajo de 2.000 $ con salidas de ETF (399 M$ en la semana) y más débil que Bitcoin. Si el rebote sigue, el dinero grande entra primero por Bitcoin. Mantengo evitar hasta ver el cierre semanal de Bitcoin y los flujos del lunes."
-  },
-  {
-   "ts": "2026-11-15T14:18:13Z",
-   "level": "info",
-   "message": "Estudio BTCUSDT: neutral. Rebote de 61.946 $ a unos 66.000 $ tras la limpieza de largos (más de 2.000 M$ liquidados) con el índice de miedo en 10 y el RSI diario saliendo de sobreventa (26). Es compatible con un suelo de corto plazo, pero el vendedor de fondo sigue: siete días de salidas de ETF (1.910 M$) y Fed subiendo tipo"
   }
  ]
 }
